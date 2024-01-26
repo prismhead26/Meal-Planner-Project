@@ -69,6 +69,7 @@ SO THAT I can get a 7-day meal plan for breakfast, lunch, and dinner.
 - HTML & CSS
 - Dynamic JavaScript
 - jQuery: [jQuery](https://jquery.com/)
+- spoonacular API: [spoonacular API](https://spoonacular.com/food-api/docs#Nutrition-by-ID)
 - License Badge: [Shields.io](https://shields.io/)
 - Visual Studio Code: [Website](https://code.visualstudio.com/)
 

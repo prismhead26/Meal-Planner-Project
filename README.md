@@ -22,9 +22,9 @@ You and your group will use everything you’ve learned over the past six module
 ## User Story
 
 ```md
-AS AN employee ...
-I WANT to ...
-SO THAT I can ...
+AS a person who wants planned meals
+I WANT to be able input my my diet information and choose certain ingredients
+SO THAT I can get a 7-day meal plan for breakfast, lunch, and dinner.
 ```
 
 ## Acceptance Criteria

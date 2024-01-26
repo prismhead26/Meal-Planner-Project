@@ -1,4 +1,4 @@
-# Payment-Landing-Page-Project
+# Meal-Planner-Project
 
 ## Description:
 

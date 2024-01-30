@@ -1,4 +1,6 @@
-const API_KEY = process.env.API_KEY
+// const API_KEY = process.env.API_KEY 
+const API_KEY = '4d568b90635e43f4a627b33131e5f540' 
+
 const BASE_URL = 'https://api.spoonacular.com'
 const recipeSearchPath = '/recipes/complexSearch'
 

@@ -32,8 +32,28 @@
     </header>
     <div class="container">
         <div class="box">
-            <h2>Placeholder</h2>
-            <p>Placeholder</p>
+            <h2>Recipes</h2>
+            <form id="recipeForm">
+                <label for="searchText">Cuisines:</label>
+                <input type="text" id="searchText" name="searchText">
+                <label for="dietType">Diet:</label>
+                <select id="dietType" name="dietType">
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="pescatarian">Pescatarian</option>
+                    <option value="gluten">Gluten</option>
+                    <option value="primal">Primal</option>
+                    <option value="kosher">Kosher</option>
+                </select>
+            <p>Ingredients</p>
+            <div>
+                <button type="button" onclick="searchWithIngredient('pasta')">Pasta</button>
+                <button type="button" onclick="searchWithIngredient('rice')">Rice</button>
+                <button type="button" onclick="searchWithIngredient('chicken')">Chicken</button>
+            </div>
+
+            <button type="search">Generate Results</button>
+            </form>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

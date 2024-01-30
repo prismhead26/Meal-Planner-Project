@@ -35,10 +35,12 @@ function buildParamterString(params) {
         }).join('&')
 }
 
-function searchRecipies(searchText, dietType) {
+function searchRecipies(searchText, dietType, numResults) {
     const params = {
         diet: dietType,
         query: searchText,
+        number: numResults,
+
         ...DEFAULT_PARAMETERS
     }
     const url = `${BASE_URL}${recipeSearchPath}?${buildParamterString(params)}`
@@ -48,5 +50,4 @@ function searchRecipies(searchText, dietType) {
     .then(console.log)
 }
 
-
-toggleIngredientButtons();
+searchRecipies('pasta', 'vegetarian', 1)

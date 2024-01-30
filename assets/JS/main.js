@@ -30,6 +30,7 @@ function searchRecipies(searchText, dietType) {
     const url = `${BASE_URL}${recipeSearchPath}?${buildParamterString(params)}`
     fetch(url)
     .then(res => res.json())
+    // data results
     .then(console.log)
 }
 

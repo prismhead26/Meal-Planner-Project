@@ -10,6 +10,20 @@ const DEFAULT_PARAMETERS = {
     addRecipeInformation: true,
 }
 
+function toggleIngredientButtons() {
+    const dietType = document.getElementById('dietType').value;
+    console.log("Selected diet type:", dietType);
+    document.querySelectorAll('.ingredient-button').forEach(button => {
+        const buttonD = button.dataset.diet.split(',');
+        console.log("Button diets:", buttonD);
+        if (buttonD.includes(dietType) || buttonD.includes('common')){
+            button.style.display = 'inline-block';
+        } else {
+            button.style.display = 'none';
+        }
+    });
+}
+
 function buildParamterString(params) {
     // Covert object to array of arrays
     // Replace each array item with string 'key=value'
@@ -34,4 +48,5 @@ function searchRecipies(searchText, dietType) {
     .then(console.log)
 }
 
-searchRecipies('pasta', 'vegetarian')
+
+toggleIngredientButtons();

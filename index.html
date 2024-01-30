@@ -18,7 +18,7 @@
         .box {
             width: 300px;
             height: 300px;
-            background-color: #68c3a3; /* Light green */
+            background-color: #77ccae; /* Light green */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
             text-align: center;
@@ -37,7 +37,8 @@
                 <label for="searchText">Cuisines:</label>
                 <input type="text" id="searchText" name="searchText">
                 <label for="dietType">Diet:</label>
-                <select id="dietType" name="dietType">
+                <select id="dietType" name="dietType" onchange="toggleIngredientButtons()">
+                    <option value="common">Common</option>
                     <option value="vegetarian">Vegetarian</option>
                     <option value="vegan">Vegan</option>
                     <option value="pescatarian">Pescatarian</option>
@@ -47,9 +48,16 @@
                 </select>
             <p>Ingredients</p>
             <div>
-                <button type="button" onclick="searchWithIngredient('pasta')">Pasta</button>
-                <button type="button" onclick="searchWithIngredient('rice')">Rice</button>
-                <button type="button" onclick="searchWithIngredient('chicken')">Chicken</button>
+                <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher,common" onclick="searchWithIngredient('beef')">Beef</button>
+                <button type="button" class="ingredient-button" data-diet="primal,common,gluten,kosher" onclick="searchWithIngredient('chicken')">Chicken</button>
+                <button type="button" class="ingredient-button" data-diet="common,primal,gluten" onclick="searchWithIngredient('pork')">Pork</button>
+                <button type="button" class="ingredient-button" data-diet="common,primal,gluten,pescatarian" onclick="searchWithIngredient('fish')">Fish</button>
+                <button type="button" class="ingredient-button" data-diet="common,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('egg')">Egg</button>
+                <button type="button" class="ingredient-button" data-diet="common,vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('rice')">Rice</button>
+                <button type="button" class="ingredient-button" data-diet="common,vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tofu')">Tofu</button>
+                <button type="button" class="ingredient-button" data-diet="common,vegan,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('pasta')">Pasta</button>
+                <button type="button" class="ingredient-button" data-diet="common,vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('beans')">Beans</button>
+                <button type="button" class="ingredient-button" data-diet="common,vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tomato')">Tomato</button>
             </div>
 
             <button type="search">Generate Results</button>

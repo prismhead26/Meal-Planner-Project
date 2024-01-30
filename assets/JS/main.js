@@ -35,10 +35,15 @@ function buildParamterString(params) {
         }).join('&')
 }
 
-function searchRecipies(searchText, dietType, numResults) {
+function searchRecipies(searchText, cuisineType, dietType, intolerancesType, includeIngredientsType, typeType, numResults) {
     const params = {
-        diet: dietType,
         query: searchText,
+        cuisine: cuisineType,
+        diet: dietType,
+        intolerances: intolerancesType,
+        includeIngredients: includeIngredientsType,
+        // meal type
+        type: typeType,
         number: numResults,
 
         ...DEFAULT_PARAMETERS
@@ -47,7 +52,18 @@ function searchRecipies(searchText, dietType, numResults) {
     fetch(url)
     .then(res => res.json())
     // data results
-    .then(console.log)
+    .then((data) => {
+        console.log(data)
+    })
 }
 
-searchRecipies('pasta', 'vegetarian', 1)
+searchRecipies('', 'american', '', '', 'eggs,cheese', 'breakfast', 3)
+
+// gets a fun random cocktail
+function GetDrink() {
+    const drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
+    fetch(drinkUrl)
+    .then (res => res.json())
+    .then(console.log)
+}
+GetDrink()

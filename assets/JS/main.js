@@ -17,12 +17,20 @@ function toggleIngredientButtons() {
     document.querySelectorAll('.ingredient-button').forEach(button => {
         const buttonD = button.dataset.diet.split(',');
         console.log("Button diets:", buttonD);
-        if (buttonD.includes(dietType) || buttonD.includes('common')){
+        if (dietType === 'common') {
             button.style.display = 'inline-block';
         } else {
-            button.style.display = 'none';
+            if (buttonD.includes(dietType)){
+                button.style.display = 'inline-block';
+            } else {
+                button.style.display = 'none';
+            }
         }
     });
+}
+
+function toggleSelection(button) {
+    button.classList.toggle('selected');
 }
 
 function buildParamterString(params) {
@@ -71,4 +79,12 @@ function GetDrink() {
     .then (res => res.json())
     .then(console.log)
 }
+
+// Event listener to select ingredient buttons
+document.getElementById('dynamicBox').addEventListener('click', function(event) {
+    if (event.target.classList.contains('ingredient-button')) {
+        toggleSelection(event.target);
+    }
+});
+
 GetDrink()

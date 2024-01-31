@@ -9,7 +9,7 @@ body {
 }
 
 header {
-    background-color: #77ccae; 
+    background-color: #68c3a3; 
     padding: 20px;
     text-align: center;
 }
@@ -35,7 +35,6 @@ button {
 button:hover {
     background-color: #5ba48a; 
 }
-
 
 a {
     color: #007bff; 

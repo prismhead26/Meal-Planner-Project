@@ -17,12 +17,50 @@
 
         .box {
             width: 300px;
-            height: 300px;
+            min-height: 300px;
             background-color: #77ccae; /* Light green */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
             text-align: center;
             padding: 20px;
+            transition: min-height 0.3s;
+        }
+
+        .ingredient-button {
+            background-color: #68c3a3;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+            outline: none;
+        }
+
+        .ingredient-button.selected {
+            background-color: #68c3a3;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            outline: none;
+            background-color: #5ba48a;
+        } 
+
+        button#generateResults {
+            background-color: #68c3a3;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            outline: none;
+            margin-top: 10px;
+        }
+
+        button#generateResults:hover {
+            background-color: #5ba48a;
         }
     </style>
 </head>
@@ -31,11 +69,17 @@
         <h1>🍔 Plan Your Meals 🍔</h1>
     </header>
     <div class="container">
-        <div class="box">
+        <div class="box" id="dynamicBox"> <!-- We can simplify the buttons with a loop in javascript if desired. I don't personally mind doing it in HTML, but doing so in Javascript may perhaps be more efficient -- Pat -->
             <h2>Recipes</h2>
             <form id="recipeForm">
                 <label for="searchText">Cuisines:</label>
-                <input type="text" id="searchText" name="searchText">
+                <input type="text" id="searchText" name="searchText">  
+                <label for="typeType">Meal Type:</label> <!-- Breakfast, lunch, dinner selection -->
+                <div>
+                    <button type="button" class="meal-type-button" onclick="selectMealType('breakfast')">Breakfast</button>
+                    <button type="button" class="meal-type-button" onclick="selectMealType('lunch')">Lunch</button>
+                    <button type="button" class="meal-type-button" onclick="selectMealType('dinner')">Dinner</button>
+                </div>         
                 <label for="dietType">Diet:</label>
                 <select id="dietType" name="dietType" onchange="toggleIngredientButtons()">
                     <option value="common">Common</option>
@@ -48,22 +92,30 @@
                 </select>
             <p>Ingredients</p>
             <div>
-                <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher,common" onclick="searchWithIngredient('beef')">Beef</button>
-                <button type="button" class="ingredient-button" data-diet="primal,common,gluten,kosher" onclick="searchWithIngredient('chicken')">Chicken</button>
-                <button type="button" class="ingredient-button" data-diet="common,primal,gluten" onclick="searchWithIngredient('pork')">Pork</button>
-                <button type="button" class="ingredient-button" data-diet="common,primal,gluten,pescatarian" onclick="searchWithIngredient('fish')">Fish</button>
-                <button type="button" class="ingredient-button" data-diet="common,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('egg')">Egg</button>
-                <button type="button" class="ingredient-button" data-diet="common,vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('rice')">Rice</button>
-                <button type="button" class="ingredient-button" data-diet="common,vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tofu')">Tofu</button>
-                <button type="button" class="ingredient-button" data-diet="common,vegan,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('pasta')">Pasta</button>
-                <button type="button" class="ingredient-button" data-diet="common,vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('beans')">Beans</button>
-                <button type="button" class="ingredient-button" data-diet="common,vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tomato')">Tomato</button>
+                <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('beef')">Beef</button>
+                <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('chicken')">Chicken</button>
+                <button type="button" class="ingredient-button" data-diet="primal,gluten" onclick="searchWithIngredient('pork')">Pork</button>
+                <button type="button" class="ingredient-button" data-diet="primal,gluten,pescatarian" onclick="searchWithIngredient('fish')">Fish</button>
+                <button type="button" class="ingredient-button" data-diet="primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('egg')">Egg</button>
+                <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('rice')">Rice</button>
+                <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tofu')">Tofu</button>
+                <button type="button" class="ingredient-button" data-diet="vegan,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('pasta')">Pasta</button>
+                <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('beans')">Beans</button>
+                <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tomato')">Tomato</button>
             </div>
-
-            <button type="search">Generate Results</button>
+            <button id="generateResults">Show Me Recipes</button>
             </form>
         </div>
     </div>
+    <script>
+        function setBoxSize() {
+            const box = document.getElementById('dynamicBox')
+            const totalHeight = array.from(box.children).reduce((acc, child) => {
+                return acc + child.offsetHeight;
+            }, 0);
+            box.style.minHeight = totalHeight + 'px';
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./assets/JS/main.js"></script>
 </body>

@@ -1,5 +1,6 @@
 // const API_KEY = process.env.API_KEY 
-const API_KEY = '4d568b90635e43f4a627b33131e5f540' 
+// const API_KEY = '4d568b90635e43f4a627b33131e5f540'
+const API_KEY = '0e4952ee45974218818a782582391c14'
 
 const BASE_URL = 'https://api.spoonacular.com'
 const recipeSearchPath = '/recipes/complexSearch'
@@ -58,6 +59,10 @@ function searchRecipies(searchText, cuisineType, dietType, intolerancesType, inc
 }
 
 searchRecipies('', 'american', '', '', 'eggs,cheese', 'breakfast', 3)
+
+function searchWithIngredient(ingredient) {
+    searchRecipies('', '', '', '', ingredient, '', 1)
+}
 
 // gets a fun random cocktail
 function GetDrink() {

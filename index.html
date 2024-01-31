@@ -7,62 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="./assets/CSS/style.css">
     <title>Meal Planner</title>
-    <style>
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .box {
-            width: 300px;
-            min-height: 300px;
-            background-color: #77ccae; /* Light green */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-            text-align: center;
-            padding: 20px;
-            transition: min-height 0.3s;
-        }
-
-        .ingredient-button {
-            background-color: #68c3a3;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin: 5px;
-            outline: none;
-        }
-
-        .ingredient-button.selected {
-            background-color: #68c3a3;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            outline: none;
-            background-color: #5ba48a;
-        } 
-
-        button#generateResults {
-            background-color: #68c3a3;
-            color: #fff;
-            border: 1px solid #fff;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            outline: none;
-            margin-top: 10px;
-        }
-
-        button#generateResults:hover {
-            background-color: #5ba48a;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -72,8 +16,10 @@
         <div class="box" id="dynamicBox"> <!-- We can simplify the buttons with a loop in javascript if desired. I don't personally mind doing it in HTML, but doing so in Javascript may perhaps be more efficient -- Pat -->
             <h2>Recipes</h2>
             <form id="recipeForm">
-                <label for="searchText">Cuisines:</label>
-                <input type="text" id="searchText" name="searchText">  
+                <div id="searchBar">
+                    <label for="searchText">Cuisines:</label>
+                    <input type="text" id="searchText" name="searchText">
+                </div>
                 <label for="typeType">Meal Type:</label> <!-- Breakfast, lunch, dinner selection -->
                 <div>
                     <button type="button" class="meal-type-button" onclick="selectMealType('breakfast')">Breakfast</button>

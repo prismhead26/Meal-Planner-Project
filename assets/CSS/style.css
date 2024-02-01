@@ -85,6 +85,10 @@ a:hover {
     background-color: #5ba48a;
 } 
 
+.row {
+    flex-direction: row;
+}
+
 button#generateResults {
     background-color: #68c3a3;
     color: #fff;

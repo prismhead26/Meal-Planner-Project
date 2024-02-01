@@ -11,12 +11,14 @@ var user = {
     // diet: document.getElementById('dietType').value,
     // ingredients: 'eggs'
 };
-
+let offset = 0
+let totalResultCount = null
+const pageSize = 3
 const DEFAULT_PARAMETERS = {
     apiKey: API_KEY,
     instructionsRequired: true,
     addRecipeInformation: true,
-    number: 3,
+    number: pageSize,
 }
 
 function toggleIngredientButtons() {
@@ -56,13 +58,16 @@ function buildParamterString(params) {
 }
 
 function searchRecipies(cuisineType, dietType, includeIngredientsType) {
+    document.getElementById('showMore').setAttribute('style', 'display: show;')
     const params = {
         cuisine: cuisineType,
         diet: dietType,
         includeIngredients: includeIngredientsType,
+        offset: offset,
 
         ...DEFAULT_PARAMETERS
     }
+    console.log('Params: ',params)
     const url = `${BASE_URL}${recipeSearchPath}?${buildParamterString(params)}`
     fetch(url)
     .then(res => res.json())
@@ -74,11 +79,12 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
         let textContent = '';
         for (let i = 0; i < data.results.length; i ++) {
             // get meal information from data
-            const mealTitle = data.results[i].title
-            const imagesrc = data.results[i].image
-            const readyInMinutes = data.results[i].readyInMinutes
-            const servings = data.results[i].servings
-            const instructions = data.results[i].spoonacularSourceUrl
+            const meal = data.results[i]
+            const mealTitle = meal.title
+            const imagesrc = meal.image
+            const readyInMinutes = meal.readyInMinutes
+            const servings = meal.servings
+            const instructions = meal.spoonacularSourceUrl
 
             textContent += `
                 <div id="mealInfo">
@@ -90,21 +96,39 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
                 </div>
             `;
         }
-        document.getElementById('mealData').innerHTML = textContent
+        let rowContent = `<section class="mealData" class="row" >${textContent}</section>`
+        document.getElementById('container').innerHTML = document.getElementById('container').innerHTML + rowContent
+        totalResultCount = data.totalResults
     })
         //  catches error for if any .then fails, it will return an error
         .catch((err) => console.log('Failed to load', err));
 }
+document.getElementById('showMore').setAttribute('style', 'display: none;')
+document.getElementById('showMore').addEventListener('click', () => {
+    offset += 3
+    console.log(offset)
+    searchRecipies('', user.diet, user.includeIngredients)
+    if (totalResultCount === null && offset >= totalResultCount - pageSize) {
+        document.getElementById('showMore').setAttribute('style', 'display: none;')
+    }
+})
 
 function searchWithIngredient(ingredient) {
     user["includeIngredients"] = ingredient
     console.log('user ingredient: ',user.includeIngredients)
 }
 
+function clearPastResults() {
+    $(".mealData").removeClass();
+    offset = 0
+    totalResultCount = null
+}
+
 document.getElementById('generateResults').addEventListener('click', () => {
-    if (!user.hasOwnProperty('diet' || 'includeIngredients')) {
+    if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
         return
     }
+    clearPastResults()
     searchRecipies('', user.diet, user.includeIngredients)
 })
 
@@ -129,7 +153,7 @@ $('#generateResults').click(function(e) {
         return
     }
     $('#dynamicBox').animate({
-        'margin-left' : '-900px'
+        // 'margin-left' : '-900px'
     });                 
 });
 

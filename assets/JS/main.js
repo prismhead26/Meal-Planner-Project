@@ -44,12 +44,11 @@ function buildParamterString(params) {
         }).join('&')
 }
 
-function searchRecipies(searchText, cuisineType, dietType, intolerancesType, includeIngredientsType, typeType, numResults) {
+function searchRecipies(searchText, cuisineType, dietType, includeIngredientsType, typeType, numResults) {
     const params = {
         query: searchText,
         cuisine: cuisineType,
         diet: dietType,
-        intolerances: intolerancesType,
         includeIngredients: includeIngredientsType,
         // meal type
         type: typeType,
@@ -63,13 +62,23 @@ function searchRecipies(searchText, cuisineType, dietType, intolerancesType, inc
     // data results
     .then((data) => {
         console.log(data)
+        const mealTitle = data.results[0].title
+        document.getElementById('mealData').innerHTML = `
+        <h1>${mealTitle}</h1>
+    `;
     })
 }
+/* <img src="${}" alt="food image"></img>
+<h3>${}</h3>
+<li>Ingredients: ${} </li>
+<p>Ready in ${} minutes</p>
+<p>Servings: ${} </p> 
+<a>Instructions Link</a>*/
 
-searchRecipies('', 'american', '', '', 'eggs,cheese', 'breakfast', 3)
+searchRecipies('', 'american', '', 'eggs,cheese', 'breakfast', 3)
 
 function searchWithIngredient(ingredient) {
-    searchRecipies('', '', '', '', ingredient, '', 1)
+    searchRecipies('', '', '', ingredient, '', 1)
 }
 
 // gets a fun random cocktail

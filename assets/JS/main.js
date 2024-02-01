@@ -73,24 +73,24 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
         // for loop runs through all results and displays via DOM per div:mealInfo
         let textContent = '';
         for (let i = 0; i < data.results.length; i ++) {
-        // get meal information from data
-        const mealTitle = data.results[i].title
-        const imagesrc = data.results[i].image
-        const readyInMinutes = data.results[i].readyInMinutes
-        const servings = data.results[i].servings
-        const instructions = data.results[i].spoonacularSourceUrl
+            // get meal information from data
+            const mealTitle = data.results[i].title
+            const imagesrc = data.results[i].image
+            const readyInMinutes = data.results[i].readyInMinutes
+            const servings = data.results[i].servings
+            const instructions = data.results[i].spoonacularSourceUrl
 
-        textContent += `
-        <div id="mealInfo">
-            <h1>${mealTitle}</h1>
-            <img src="${imagesrc}" alt="food image"></img>
-            <h3></h3>
-            <li>Ingredients: </li>
-            <p>Ready in ${readyInMinutes} minutes</p>
-            <p>Servings: ${servings}</p> 
-            <a href='${instructions}'>Instructions Link</a>
-        </div>
-    `;
+            textContent += `
+                <div id="mealInfo">
+                    <h1>${mealTitle}</h1>
+                    <img src="${imagesrc}" alt="food image"></img>
+                    <h3></h3>
+                    <li>Ingredients: </li>
+                    <p>Ready in ${readyInMinutes} minutes</p>
+                    <p>Servings: ${servings}</p> 
+                    <a href='${instructions}'>Instructions Link</a>
+                </div>
+            `;
         }
         document.getElementById('mealData').innerHTML = textContent
     })

@@ -29,7 +29,7 @@ function toggleIngredientButtons() {
     console.log("Selected diet type:", dietType);
     // creates key:value pair for user obj
     user["diet"] = dietType;
-    console.log(JSON.stringify(user.diet.split('"')));
+    console.log(user.diet);
     document.querySelectorAll('.ingredient-button').forEach(button => {
         const buttonD = button.dataset.diet.split(',');
         console.log("Button diets:", buttonD);
@@ -75,15 +75,21 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType, numResult
     // data results
     .then((data) => {
         console.log(data)
+        // get meal Title from data
         const mealTitle = data.results[0].title
+        const imagesrc = data.results[0].image
+        const readyInMinutes = data.results[0].readyInMinutes
+        const servings = data.results[0].servings
+        const instructions = data.results[0].spoonacularSourceUrl
+
         document.getElementById('mealData').innerHTML = `
         <h1>${mealTitle}</h1>
-        <img src="" alt="food image"></img>
+        <img src="${imagesrc}" alt="food image"></img>
         <h3></h3>
         <li>Ingredients: </li>
-        <p>Ready in  minutes</p>
-        <p>Servings:  </p> 
-        <a>Instructions Link</a>
+        <p>Ready in ${readyInMinutes} minutes</p>
+        <p>Servings: ${servings}</p> 
+        <a href='${instructions}'>Instructions Link</a>
     `;
     })
 }

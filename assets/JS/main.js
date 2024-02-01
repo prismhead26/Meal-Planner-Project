@@ -84,8 +84,6 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
                 <div id="mealInfo">
                     <h1>${mealTitle}</h1>
                     <img src="${imagesrc}" alt="food image"></img>
-                    <h3></h3>
-                    <li>Ingredients: </li>
                     <p>Ready in ${readyInMinutes} minutes</p>
                     <p>Servings: ${servings}</p> 
                     <a href='${instructions}'>Instructions Link</a>

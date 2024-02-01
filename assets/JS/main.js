@@ -6,10 +6,10 @@ const API_KEY = '0e4952ee45974218818a782582391c14'
 const BASE_URL = 'https://api.spoonacular.com'
 const recipeSearchPath = '/recipes/complexSearch'
 
-const user = {
-    cuisine: 'american',
-    diet:  'gluten',
-    ingredients: 'eggs'
+var user = {
+    // cuisine: 'american',
+    // diet: document.getElementById('dietType').value,
+    // ingredients: 'eggs'
 };
 
 // function createMeal(cuisine, diet, ingredients) {
@@ -27,6 +27,9 @@ const DEFAULT_PARAMETERS = {
 function toggleIngredientButtons() {
     const dietType = document.getElementById('dietType').value;
     console.log("Selected diet type:", dietType);
+    // creates key:value pair for user obj
+    user["diet"] = dietType;
+    console.log(JSON.stringify(user.diet));
     document.querySelectorAll('.ingredient-button').forEach(button => {
         const buttonD = button.dataset.diet.split(',');
         console.log("Button diets:", buttonD);

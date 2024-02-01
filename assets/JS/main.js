@@ -5,6 +5,18 @@ const API_KEY = '0e4952ee45974218818a782582391c14'
 const BASE_URL = 'https://api.spoonacular.com'
 const recipeSearchPath = '/recipes/complexSearch'
 
+const user = {
+    cuisine: 'american',
+    diet:  'gluten',
+    ingredients: 'eggs'
+};
+
+// function createMeal(cuisine, diet, ingredients) {
+//     searchRecipes(cuisine, diet, ingredients, 5)
+// }
+
+// const createMeal = user => createMeal(cuisine(user))(diet(user));
+
 const DEFAULT_PARAMETERS = {
     apiKey: API_KEY,
     instructionsRequired: true,
@@ -44,14 +56,11 @@ function buildParamterString(params) {
         }).join('&')
 }
 
-function searchRecipies(searchText, cuisineType, dietType, includeIngredientsType, typeType, numResults) {
+function searchRecipies(cuisineType, dietType, includeIngredientsType, numResults) {
     const params = {
-        query: searchText,
         cuisine: cuisineType,
         diet: dietType,
         includeIngredients: includeIngredientsType,
-        // meal type
-        type: typeType,
         number: numResults,
 
         ...DEFAULT_PARAMETERS
@@ -75,10 +84,10 @@ function searchRecipies(searchText, cuisineType, dietType, includeIngredientsTyp
 <p>Servings: ${} </p> 
 <a>Instructions Link</a>*/
 
-searchRecipies('', 'american', '', 'eggs,cheese', 'breakfast', 3)
+// searchRecipies('', 'american', '', 'eggs,cheese', 'breakfast', 3)
 
 function searchWithIngredient(ingredient) {
-    searchRecipies('', '', '', ingredient, '', 1)
+    searchRecipies('', '', ingredient, 1)
 }
 
 // gets a fun random cocktail

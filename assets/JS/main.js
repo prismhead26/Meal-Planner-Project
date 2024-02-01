@@ -11,17 +11,14 @@ var user = {
     // diet: document.getElementById('dietType').value,
     // ingredients: 'eggs'
 };
-
-// function createMeal(cuisine, diet, ingredients) {
-//     searchRecipes(cuisine, diet, ingredients, 5)
-// }
-
-// const createMeal = user => createMeal(cuisine(user))(diet(user));
-
+let offset = 0
+let totalResultCount = null
+const pageSize = 3
 const DEFAULT_PARAMETERS = {
     apiKey: API_KEY,
     instructionsRequired: true,
     addRecipeInformation: true,
+    number: pageSize,
 }
 
 function toggleIngredientButtons() {
@@ -32,7 +29,7 @@ function toggleIngredientButtons() {
     console.log(user.diet);
     document.querySelectorAll('.ingredient-button').forEach(button => {
         const buttonD = button.dataset.diet.split(',');
-        console.log("Button diets:", buttonD);
+        // console.log("Button diets:", buttonD);
         if (dietType === 'common') {
             button.style.display = 'inline-block';
         } else {
@@ -60,46 +57,80 @@ function buildParamterString(params) {
         }).join('&')
 }
 
-function searchRecipies(cuisineType, dietType, includeIngredientsType, numResults) {
+function searchRecipies(cuisineType, dietType, includeIngredientsType) {
+    document.getElementById('showMore').setAttribute('style', 'display: show;')
     const params = {
         cuisine: cuisineType,
         diet: dietType,
         includeIngredients: includeIngredientsType,
-        number: numResults,
+        offset: offset,
 
         ...DEFAULT_PARAMETERS
     }
+    console.log('Params: ',params)
     const url = `${BASE_URL}${recipeSearchPath}?${buildParamterString(params)}`
     fetch(url)
     .then(res => res.json())
     // data results
     .then((data) => {
         console.log(data)
-        // get meal Title from data
-        const mealTitle = data.results[0].title
-        const imagesrc = data.results[0].image
-        const readyInMinutes = data.results[0].readyInMinutes
-        const servings = data.results[0].servings
-        const instructions = data.results[0].spoonacularSourceUrl
 
-        document.getElementById('mealData').innerHTML = `
-        <h1>${mealTitle}</h1>
-        <img src="${imagesrc}" alt="food image"></img>
-        <h3></h3>
-        <li>Ingredients: </li>
-        <p>Ready in ${readyInMinutes} minutes</p>
-        <p>Servings: ${servings}</p> 
-        <a href='${instructions}'>Instructions Link</a>
-    `;
+        // for loop runs through all results and displays via DOM per div:mealInfo
+        let textContent = '';
+        for (let i = 0; i < data.results.length; i ++) {
+            // get meal information from data
+            const meal = data.results[i]
+            const mealTitle = meal.title
+            const imagesrc = meal.image
+            const readyInMinutes = meal.readyInMinutes
+            const servings = meal.servings
+            const instructions = meal.spoonacularSourceUrl
+
+            textContent += `
+                <div id="mealInfo">
+                    <h1>${mealTitle}</h1>
+                    <img src="${imagesrc}" alt="food image"></img>
+                    <p>Ready in ${readyInMinutes} minutes</p>
+                    <p>Servings: ${servings}</p> 
+                    <a href='${instructions}'>Instructions Link</a>
+                </div>
+            `;
+        }
+        let rowContent = `<section class="mealData" class="row" >${textContent}</section>`
+        document.getElementById('container').innerHTML = document.getElementById('container').innerHTML + rowContent
+        totalResultCount = data.totalResults
     })
+        //  catches error for if any .then fails, it will return an error
+        .catch((err) => console.log('Failed to load', err));
 }
-
-
-// searchRecipies('american', '', 'eggs,cheese', 3)
+document.getElementById('showMore').setAttribute('style', 'display: none;')
+document.getElementById('showMore').addEventListener('click', () => {
+    offset += 3
+    console.log(offset)
+    searchRecipies('', user.diet, user.includeIngredients)
+    if (totalResultCount === null && offset >= totalResultCount - pageSize) {
+        document.getElementById('showMore').setAttribute('style', 'display: none;')
+    }
+})
 
 function searchWithIngredient(ingredient) {
-    searchRecipies('', '', ingredient, 1)
+    user["includeIngredients"] = ingredient
+    console.log('user ingredient: ',user.includeIngredients)
 }
+
+function clearPastResults() {
+    $(".mealData").removeClass();
+    offset = 0
+    totalResultCount = null
+}
+
+document.getElementById('generateResults').addEventListener('click', () => {
+    if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
+        return
+    }
+    clearPastResults()
+    searchRecipies('', user.diet, user.includeIngredients)
+})
 
 // gets a fun random cocktail
 function GetDrink() {
@@ -118,8 +149,11 @@ document.getElementById('dynamicBox').addEventListener('click', function(event) 
 
 $('#generateResults').click(function(e) {
     e.preventDefault();
+    if (!user.hasOwnProperty('diet' || 'includeIngredients')) {
+        return
+    }
     $('#dynamicBox').animate({
-        'margin-left' : '-900px'
+        // 'margin-left' : '-900px'
     });                 
 });
 

@@ -12,12 +12,6 @@ var user = {
     // ingredients: 'eggs'
 };
 
-// function createMeal(cuisine, diet, ingredients) {
-//     searchRecipes(cuisine, diet, ingredients, 5)
-// }
-
-// const createMeal = user => createMeal(cuisine(user))(diet(user));
-
 const DEFAULT_PARAMETERS = {
     apiKey: API_KEY,
     instructionsRequired: true,
@@ -107,7 +101,6 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
 function searchWithIngredient(ingredient) {
     user["includeIngredients"] = ingredient
     console.log('user ingredient: ',user.includeIngredients)
-    // searchRecipies('', '', ingredient, 2)
 }
 
 document.getElementById('generateResults').addEventListener('click', () => {

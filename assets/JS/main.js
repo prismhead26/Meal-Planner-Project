@@ -75,30 +75,40 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType, numResult
     // data results
     .then((data) => {
         console.log(data)
-        // get meal Title from data
-        const mealTitle = data.results[0].title
-        const imagesrc = data.results[0].image
-        const readyInMinutes = data.results[0].readyInMinutes
-        const servings = data.results[0].servings
-        const instructions = data.results[0].spoonacularSourceUrl
 
-        document.getElementById('mealData').innerHTML = `
-        <h1>${mealTitle}</h1>
-        <img src="${imagesrc}" alt="food image"></img>
-        <h3></h3>
-        <li>Ingredients: </li>
-        <p>Ready in ${readyInMinutes} minutes</p>
-        <p>Servings: ${servings}</p> 
-        <a href='${instructions}'>Instructions Link</a>
+        // for loop runs through all results and displays via DOM per div:mealInfo
+        let textContent = '';
+        for (let i = 0; i < data.results.length; i ++) {
+        // get meal information from data
+        const mealTitle = data.results[i].title
+        const imagesrc = data.results[i].image
+        const readyInMinutes = data.results[i].readyInMinutes
+        const servings = data.results[i].servings
+        const instructions = data.results[i].spoonacularSourceUrl
+
+        textContent += `
+        <div id="mealInfo">
+            <h1>${mealTitle}</h1>
+            <img src="${imagesrc}" alt="food image"></img>
+            <h3></h3>
+            <li>Ingredients: </li>
+            <p>Ready in ${readyInMinutes} minutes</p>
+            <p>Servings: ${servings}</p> 
+            <a href='${instructions}'>Instructions Link</a>
+        </div>
     `;
+        }
+        document.getElementById('mealData').innerHTML = textContent
     })
+        //  catches error for if any .then fails, it will return an error
+        .catch((err) => console.log('Failed to load', err));
 }
 
 
 // searchRecipies('american', '', 'eggs,cheese', 3)
 
 function searchWithIngredient(ingredient) {
-    searchRecipies('', '', ingredient, 1)
+    searchRecipies('', '', ingredient, 2)
 }
 
 // gets a fun random cocktail

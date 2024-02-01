@@ -111,6 +111,9 @@ function searchWithIngredient(ingredient) {
 }
 
 document.getElementById('generateResults').addEventListener('click', () => {
+    if (!user.hasOwnProperty('diet' || 'includeIngredients')) {
+        return
+    }
     searchRecipies('', user.diet, user.includeIngredients)
 })
 

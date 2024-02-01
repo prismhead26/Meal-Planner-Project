@@ -78,15 +78,16 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType, numResult
         const mealTitle = data.results[0].title
         document.getElementById('mealData').innerHTML = `
         <h1>${mealTitle}</h1>
+        <img src="${}" alt="food image"></img>
+        <h3>${}</h3>
+        <li>Ingredients: ${} </li>
+        <p>Ready in ${} minutes</p>
+        <p>Servings: ${} </p> 
+        <a>Instructions Link</a>
     `;
     })
 }
-/* <img src="${}" alt="food image"></img>
-<h3>${}</h3>
-<li>Ingredients: ${} </li>
-<p>Ready in ${} minutes</p>
-<p>Servings: ${} </p> 
-<a>Instructions Link</a>*/
+
 
 // searchRecipies('', 'american', '', 'eggs,cheese', 'breakfast', 3)
 

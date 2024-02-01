@@ -134,6 +134,9 @@ document.getElementById('dynamicBox').addEventListener('click', function(event) 
 
 $('#generateResults').click(function(e) {
     e.preventDefault();
+    if (!user.hasOwnProperty('diet' || 'includeIngredients')) {
+        return
+    }
     $('#dynamicBox').animate({
         'margin-left' : '-900px'
     });                 

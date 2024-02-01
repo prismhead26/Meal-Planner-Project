@@ -87,4 +87,11 @@ document.getElementById('dynamicBox').addEventListener('click', function(event) 
     }
 });
 
+$('#generateResults').click(function(e) {
+    e.preventDefault();
+    $('#dynamicBox').animate({
+        'margin-left' : '-900px'
+    });                 
+});
+
 GetDrink()

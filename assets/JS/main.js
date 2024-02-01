@@ -1,6 +1,6 @@
 // const API_KEY = process.env.API_KEY 
-// const API_KEY = '4d568b90635e43f4a627b33131e5f540'
-const API_KEY = '0e4952ee45974218818a782582391c14'
+const API_KEY = '4d568b90635e43f4a627b33131e5f540'
+// const API_KEY = '0e4952ee45974218818a782582391c14'
 // const API_KEY = 'e755066ea6c044f4b71d08597fba8443'
 
 const BASE_URL = 'https://api.spoonacular.com'
@@ -29,7 +29,7 @@ function toggleIngredientButtons() {
     console.log("Selected diet type:", dietType);
     // creates key:value pair for user obj
     user["diet"] = dietType;
-    console.log(JSON.stringify(user.diet));
+    console.log(JSON.stringify(user.diet.split('"')));
     document.querySelectorAll('.ingredient-button').forEach(button => {
         const buttonD = button.dataset.diet.split(',');
         console.log("Button diets:", buttonD);
@@ -78,18 +78,18 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType, numResult
         const mealTitle = data.results[0].title
         document.getElementById('mealData').innerHTML = `
         <h1>${mealTitle}</h1>
-        <img src="${}" alt="food image"></img>
-        <h3>${}</h3>
-        <li>Ingredients: ${} </li>
-        <p>Ready in ${} minutes</p>
-        <p>Servings: ${} </p> 
+        <img src="" alt="food image"></img>
+        <h3></h3>
+        <li>Ingredients: </li>
+        <p>Ready in  minutes</p>
+        <p>Servings:  </p> 
         <a>Instructions Link</a>
     `;
     })
 }
 
 
-// searchRecipies('', 'american', '', 'eggs,cheese', 'breakfast', 3)
+// searchRecipies('american', '', 'eggs,cheese', 3)
 
 function searchWithIngredient(ingredient) {
     searchRecipies('', '', ingredient, 1)

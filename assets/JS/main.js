@@ -22,6 +22,7 @@ const DEFAULT_PARAMETERS = {
     apiKey: API_KEY,
     instructionsRequired: true,
     addRecipeInformation: true,
+    number: 3,
 }
 
 function toggleIngredientButtons() {
@@ -32,7 +33,7 @@ function toggleIngredientButtons() {
     console.log(user.diet);
     document.querySelectorAll('.ingredient-button').forEach(button => {
         const buttonD = button.dataset.diet.split(',');
-        console.log("Button diets:", buttonD);
+        // console.log("Button diets:", buttonD);
         if (dietType === 'common') {
             button.style.display = 'inline-block';
         } else {
@@ -60,12 +61,11 @@ function buildParamterString(params) {
         }).join('&')
 }
 
-function searchRecipies(cuisineType, dietType, includeIngredientsType, numResults) {
+function searchRecipies(cuisineType, dietType, includeIngredientsType) {
     const params = {
         cuisine: cuisineType,
         diet: dietType,
         includeIngredients: includeIngredientsType,
-        number: numResults,
 
         ...DEFAULT_PARAMETERS
     }
@@ -104,12 +104,15 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType, numResult
         .catch((err) => console.log('Failed to load', err));
 }
 
-
-// searchRecipies('american', '', 'eggs,cheese', 3)
-
 function searchWithIngredient(ingredient) {
-    searchRecipies('', '', ingredient, 2)
+    user["includeIngredients"] = ingredient
+    console.log('user ingredient: ',user.includeIngredients)
+    // searchRecipies('', '', ingredient, 2)
 }
+
+document.getElementById('generateResults').addEventListener('click', () => {
+    searchRecipies('', user.diet, user.includeIngredients)
+})
 
 // gets a fun random cocktail
 function GetDrink() {

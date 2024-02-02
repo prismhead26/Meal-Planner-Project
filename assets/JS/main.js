@@ -2,7 +2,7 @@
 
 //const API_KEY = '4d568b90635e43f4a627b33131e5f540'
 // const API_KEY = '0e4952ee45974218818a782582391c14'
- const API_KEY = 'e755066ea6c044f4b71d08597fba8443'
+const API_KEY = 'e755066ea6c044f4b71d08597fba8443'
 
 const BASE_URL = 'https://api.spoonacular.com'
 const recipeSearchPath = '/recipes/complexSearch'
@@ -12,14 +12,15 @@ const showMoreBtnEl = document.getElementById('showMore')
 const generateResultsEl = document.getElementById('generateResults')
 const dynamicBoxEl = document.getElementById('dynamicBox')
 const cuisineBoxEl = document.getElementById('cuisineBox')
+const clearDataEl = document.getElementById('clearData')
 
 showMoreBtnEl.setAttribute('style', 'display: none;')
 
 showMoreBtnEl.addEventListener('click', showMoreMeals)
 generateResultsEl.addEventListener('click', start)
 dynamicBoxEl.addEventListener('click', checkIngredient)
-cuisineBoxEl.addEventListener('click', checkCuisine);
 generateResultsEl.addEventListener('click',animate)
+clearDataEl.addEventListener('click', clearPastResults)
 
 let offset = 0
 let totalResultCount = null
@@ -88,6 +89,10 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
     // data results
     .then((data) => {
         console.log(data)
+        if (data.totalResults === 0) {
+            containerEl.innerHTML = containerEl.innerHTML + `<p style="color: red;" >No meals found! Try again.</p>`
+            return
+        }
 
         // for loop runs through all results and displays via DOM per div:mealInfo
         let textContent = '';
@@ -179,4 +184,4 @@ function animate(e) {
     });                 
 };
 
-GetDrink()
+// GetDrink()

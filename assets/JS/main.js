@@ -176,7 +176,7 @@ function checkIngredient (event) {
 
 function animate(e) {
     e.preventDefault();
-    if (!user.hasOwnProperty('diet' || 'includeIngredients')) {
+    if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
         return
     }
     $('#dynamicBox').animate({

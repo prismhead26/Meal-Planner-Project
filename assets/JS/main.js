@@ -27,6 +27,7 @@ clearDataEl.addEventListener('click', clearPastResults);
 let offset = 0;
 let totalResultCount = null;
 const pageSize = 3;
+const maxItems = 15;
 
 const user = {
 };
@@ -192,14 +193,34 @@ function createDrink() {
       const drinkTitle = drinkData.strDrink;
       const imagesrc = drinkData.strDrinkThumb;
       const drinkInstructions = drinkData.strInstructions;
-      const ingredient = drinkData.strIngredient1;
-      const measurement = drinkData.strMeasure1;
+      const strIngredient = 'strIngredient'
+      let ingredientText = ''
+        for(let i = 1; i < maxItems; i++) {
+          let string = strIngredient + i
+          if (drinkData[string] !== null) {
+            // console.log('ingredient number: ',i)
+            // console.log('ingredient: ',drinkData[string])
+            ingredientText += ( drinkData[string] + ', ')
+          }
+
+        }
+      const strMeasure = 'strMeasure'
+      let measureText = ''
+        for(let i = 1; i < maxItems; i++) {
+          let string = strMeasure + i
+          if (drinkData[string] !== null) {
+            // console.log('ingredient number: ',i)
+            // console.log('measure: ',drinkData[string])
+            measureText += ( drinkData[string] + ', ')
+          }
+
+        }
       const textContent = `
         <h1>${drinkTitle}</h1>
         <img src="${imagesrc}" alt="cocktail image" style="max-Width: 15%;"></img>
-        <p>${drinkInstructions}</p>
-        <p>${ingredient}</p>
-        <p>${measurement}</p>
+        <p>Instructions: ${drinkInstructions}</p>
+        <li>Ingredients: ${ingredientText}</li>
+        <li>Measurements: ${measureText}</li>
     `;
       const rowContent = `<section class="drinkData" class="row" >${textContent}</section>`;
       drinkContainerEl.innerHTML += rowContent;

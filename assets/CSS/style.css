@@ -137,7 +137,6 @@ button#generateResults:hover {
 
 .mealData {
     display: flex; 
-    /* flex-direction: row; */
     
 } 
 
@@ -165,6 +164,13 @@ button#generateResults:hover {
 
 #cuisineBox {
     width: 400px;
+}
+
+#mealInfo {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 

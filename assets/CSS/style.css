@@ -104,6 +104,13 @@ button#generateResults:hover {
     background-color: #5ba48a;
 }
 
+.mealData {
+    display: flex; 
+    flex-direction: row;
+    margin: auto;
+    
+} 
+
 
 @media (max-width: 768px) {
     h1 {

@@ -50,6 +50,8 @@ a:hover {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .box {
@@ -137,7 +139,8 @@ button#generateResults:hover {
 
 .mealData {
     display: flex; 
-    
+    flex-wrap: wrap;
+    background-color: #333333; 
 } 
 
 .cuisine-button {
@@ -171,6 +174,10 @@ button#generateResults:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.drinkFontColor, .foodFontColor {
+    color: #77ccae;
 }
 
 

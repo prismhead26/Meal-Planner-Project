@@ -114,9 +114,9 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
                 <div id="mealInfo" class="m-3 is-size-6">
                     <h1>Meal: ${mealTitle}</h1>
                     <img src="${imagesrc}" alt="food image" class= "image is-128x128"></img>
-                    <p>Ready in ${readyInMinutes} minutes</p>
-                    <p>Servings: ${servings}</p> 
-                    <a href='${instructions}'>Instructions Link</a>
+                    <p class="foodFontColor">Ready in ${readyInMinutes} minutes</p>
+                    <p class="foodFontColor">Servings: ${servings}</p> 
+                    <a href='${instructions}' class="foodFontColor">Instructions Link</a>
                 </div>
             `;
       }
@@ -218,9 +218,9 @@ function createDrink() {
       const textContent = `
         <h1>${drinkTitle}</h1>
         <img src="${imagesrc}" alt="cocktail image" style="max-Width: 15%;"></img>
-        <p>Instructions: ${drinkInstructions}</p>
-        <li>Ingredients: ${ingredientText}</li>
-        <li>Measurements: ${measureText}</li>
+        <p class="drinkFontColor">Instructions: ${drinkInstructions}</p>
+        <li class="drinkFontcolor">Ingredients: ${ingredientText}</li>
+        <li class="drinkFontColor">Measurements: ${measureText}</li>
     `;
       const rowContent = `<section class="drinkData" class="row" >${textContent}</section>`;
       drinkContainerEl.innerHTML += rowContent;

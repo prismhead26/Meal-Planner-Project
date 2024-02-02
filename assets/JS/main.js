@@ -14,6 +14,8 @@ const dynamicBoxEl = document.getElementById('dynamicBox')
 const cuisineBoxEl = document.getElementById('cuisineBox')
 const clearDataEl = document.getElementById('clearData')
 const backBtnEl = document.querySelector('.back-button')
+const drinkContainerEl = document.querySelector('#drinkContainer')
+
 
 showMoreBtnEl.setAttribute('style', 'display: none;')
 
@@ -154,6 +156,7 @@ function selectCuisine(userCuisine) {
 
 function clearPastResults() {
     $(".mealData").removeClass();
+    $(".drinkData").removeClass();
     offset = 0
     totalResultCount = null
 }
@@ -162,15 +165,49 @@ function start() {
     if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
         return
     }
+    // clearPastResults()
     searchRecipies(user.cuisine, user.diet, user.includeIngredients)
 }
 
+$(document).ready(function() {
+    //set initial state.
+    $('#randomDrinkCheckbox').val(this.checked);
+
+    $('#randomDrinkCheckbox').change(function() {
+        if(!this.checked) {
+            $(".drinkData").removeClass()
+        } else {
+            $(this).prop("checked")
+            createDrink()
+        }
+        // $('#randomDrinkCheckbox').val(!this.checked);        
+    });
+});
+
 // gets a fun random cocktail
-function GetDrink() {
+function createDrink() {
     const drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
     fetch(drinkUrl)
     .then (res => res.json())
-    .then(console.log)
+    .then((data) => {
+        console.log('drink obj: ',data)
+        console.log('drink Title: ',data.drinks[0].strDrink)
+        const drinkData = data.drinks[0]
+        const drinkTitle = drinkData.strDrink
+        const imagesrc = drinkData.strDrinkThumb
+        const drinkInstructions = drinkData.strInstructions
+        const ingredient = drinkData.strIngredient1
+        const measurement = drinkData.strMeasure1
+        const textContent = `
+        <h1>${drinkTitle}</h1>
+        <img src="${imagesrc}" alt="cocktail image" style="max-Width: 15%;"></img>
+        <p>${drinkInstructions}</p>
+        <p>${ingredient}</p>
+        <p>${measurement}</p>
+    `;
+    let rowContent = `<section class="drinkData" class="row" >${textContent}</section>`
+    drinkContainerEl.innerHTML = drinkContainerEl.innerHTML + rowContent
+    })
 }
 
 function checkIngredient (event) {
@@ -189,4 +226,3 @@ function animate(e) {
     });                 
 };
 
-// GetDrink()

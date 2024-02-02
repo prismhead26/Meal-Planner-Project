@@ -74,6 +74,7 @@ function buildParamterString(params) {
 
 function searchRecipies(cuisineType, dietType, includeIngredientsType) {
     showMoreBtnEl.setAttribute('style', 'display: show;')
+    generateResultsEl.setAttribute('style', 'display: none;')
     const params = {
         cuisine: cuisineType,
         diet: dietType,
@@ -91,6 +92,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
         console.log(data)
         if (data.totalResults === 0) {
             containerEl.innerHTML = containerEl.innerHTML + `<p style="color: red;" >No meals found! Try again.</p>`
+            showMoreBtnEl.setAttribute('style', 'display: none;')
             return
         }
 
@@ -156,7 +158,6 @@ function start() {
     if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
         return
     }
-    clearPastResults()
     searchRecipies(user.cuisine, user.diet, user.includeIngredients)
 }
 

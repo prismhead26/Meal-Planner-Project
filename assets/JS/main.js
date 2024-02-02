@@ -120,8 +120,10 @@ function showMoreMeals() {
     console.log('offset: ',offset)
     console.log('totalResultCount: ',totalResultCount)
     searchRecipies('', user.diet, user.includeIngredients)
-    if (totalResultCount === null && offset >= totalResultCount - pageSize) {
+    if (offset >= totalResultCount - pageSize) {
         showMoreBtnEl.setAttribute('style', 'display: none;')
+    } else {
+        console.assert(offset % 3 === 0, 'Remainder !=0');
     }
 }
 

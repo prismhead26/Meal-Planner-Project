@@ -1,7 +1,7 @@
 // const API_KEY = process.env.API_KEY 
-const API_KEY = '4d568b90635e43f4a627b33131e5f540'
+//const API_KEY = '4d568b90635e43f4a627b33131e5f540'
 // const API_KEY = '0e4952ee45974218818a782582391c14'
-// const API_KEY = 'e755066ea6c044f4b71d08597fba8443'
+ const API_KEY = 'e755066ea6c044f4b71d08597fba8443'
 
 const BASE_URL = 'https://api.spoonacular.com'
 const recipeSearchPath = '/recipes/complexSearch'
@@ -10,12 +10,14 @@ const containerEl = document.getElementById('container')
 const showMoreBtnEl = document.getElementById('showMore')
 const generateResultsEl = document.getElementById('generateResults')
 const dynamicBoxEl = document.getElementById('dynamicBox')
+const cuisineBoxEl = document.getElementById('cuisineBox')
 
 showMoreBtnEl.setAttribute('style', 'display: none;')
 
 showMoreBtnEl.addEventListener('click', showMoreMeals)
 generateResultsEl.addEventListener('click', start)
 dynamicBoxEl.addEventListener('click', checkIngredient)
+cuisineBoxEl.addEventListener('click', checkCuisine);
 generateResultsEl.addEventListener('click',animate)
 
 
@@ -164,8 +166,13 @@ function checkIngredient (event) {
     if (event.target.classList.contains('ingredient-button')) {
         toggleSelection(event.target);
     }
-};
+}
 
+function checkCuisine(event) {
+    if (event.target.classList.contains('cuisine-button')) {
+        toggleSelection(event.target);
+    }
+}
 
 function animate(e) {
     e.preventDefault();

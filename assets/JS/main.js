@@ -1,4 +1,5 @@
 // const API_KEY = process.env.API_KEY 
+
 //const API_KEY = '4d568b90635e43f4a627b33131e5f540'
 // const API_KEY = '0e4952ee45974218818a782582391c14'
  const API_KEY = 'e755066ea6c044f4b71d08597fba8443'
@@ -20,15 +21,13 @@ dynamicBoxEl.addEventListener('click', checkIngredient)
 cuisineBoxEl.addEventListener('click', checkCuisine);
 generateResultsEl.addEventListener('click',animate)
 
-
-var user = {
-    // cuisine: 'american',
-    // diet: document.getElementById('dietType').value,
-    // ingredients: 'eggs'
-};
 let offset = 0
 let totalResultCount = null
 const pageSize = 3
+
+var user = {
+};
+
 const DEFAULT_PARAMETERS = {
     apiKey: API_KEY,
     instructionsRequired: true,
@@ -102,7 +101,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
             const instructions = meal.spoonacularSourceUrl
 
             textContent += `
-                <div id="mealInfo">
+                <div id="mealInfo" class=m-3>
                     <h1>Meal: ${mealTitle}</h1>
                     <img src="${imagesrc}" alt="food image"></img>
                     <p>Ready in ${readyInMinutes} minutes</p>
@@ -115,15 +114,19 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
         containerEl.innerHTML = containerEl.innerHTML + rowContent
         totalResultCount = data.totalResults
     })
-        //  catches error for if any .then fails, it will return an error
-        .catch((err) => console.log('Failed to load', err));
+    //  catches error for if any .then fails, it will return an error
+    .catch((err) => console.log('Failed to load', err));
 }
+
 function showMoreMeals() {
     offset += 3
-    console.log(offset)
-    searchRecipies('', user.diet, user.includeIngredients)
-    if (totalResultCount === null && offset >= totalResultCount - pageSize) {
+    console.log('offset: ',offset)
+    console.log('totalResultCount: ',totalResultCount)
+    searchRecipies(user.cuisine, user.diet, user.includeIngredients)
+    if (offset >= totalResultCount - pageSize) {
         showMoreBtnEl.setAttribute('style', 'display: none;')
+    } else {
+        console.assert(offset % 3 === 0, 'Remainder !=0');
     }
 }
 
@@ -132,9 +135,9 @@ function searchWithIngredient(ingredient) {
     console.log('user ingredient: ',user.includeIngredients)
 }
 
-function selectCuisine(cuisineType) {
-    user["includeCuisine"] = cuisineType
-    console.log('user cuisine: ',user.includeCuisine)
+function selectCuisine(userCuisine) {
+    user["cuisine"] = userCuisine
+    console.log('user cuisine: ',user.cuisine)
 }
 
 function clearPastResults() {
@@ -142,7 +145,6 @@ function clearPastResults() {
     offset = 0
     totalResultCount = null
 }
-
 
 function start() {
     if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
@@ -160,16 +162,8 @@ function GetDrink() {
     .then(console.log)
 }
 
-// Event listener to select ingredient buttons
-
 function checkIngredient (event) {
     if (event.target.classList.contains('ingredient-button')) {
-        toggleSelection(event.target);
-    }
-}
-
-function checkCuisine(event) {
-    if (event.target.classList.contains('cuisine-button')) {
         toggleSelection(event.target);
     }
 }

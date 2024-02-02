@@ -119,7 +119,7 @@ function showMoreMeals() {
     offset += 3
     console.log('offset: ',offset)
     console.log('totalResultCount: ',totalResultCount)
-    searchRecipies('', user.diet, user.includeIngredients)
+    searchRecipies(user.cuisine, user.diet, user.includeIngredients)
     if (offset >= totalResultCount - pageSize) {
         showMoreBtnEl.setAttribute('style', 'display: none;')
     } else {
@@ -133,8 +133,8 @@ function searchWithIngredient(ingredient) {
 }
 
 function selectCuisine(cuisineType) {
-    user["includeCuisine"] = cuisineType
-    console.log('user cuisine: ',user.includeCuisine)
+    user["cuisine"] = cuisineType
+    console.log('user cuisine: ',user.cuisine)
 }
 
 function clearPastResults() {
@@ -148,7 +148,7 @@ function start() {
         return
     }
     clearPastResults()
-    searchRecipies('', user.diet, user.includeIngredients)
+    searchRecipies(user.cuisine, user.diet, user.includeIngredients)
 }
 
 // gets a fun random cocktail

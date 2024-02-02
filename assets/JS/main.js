@@ -88,7 +88,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
 
             textContent += `
                 <div id="mealInfo">
-                    <h1>${mealTitle}</h1>
+                    <h1>Meal: ${mealTitle}</h1>
                     <img src="${imagesrc}" alt="food image"></img>
                     <p>Ready in ${readyInMinutes} minutes</p>
                     <p>Servings: ${servings}</p> 

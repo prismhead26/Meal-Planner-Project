@@ -6,6 +6,19 @@ const API_KEY = '4d568b90635e43f4a627b33131e5f540'
 const BASE_URL = 'https://api.spoonacular.com'
 const recipeSearchPath = '/recipes/complexSearch'
 
+const containerEl = document.getElementById('container')
+const showMoreBtnEl = document.getElementById('showMore')
+const generateResultsEl = document.getElementById('generateResults')
+const dynamicBoxEl = document.getElementById('dynamicBox')
+
+showMoreBtnEl.setAttribute('style', 'display: none;')
+
+showMoreBtnEl.addEventListener('click', showMoreMeals)
+generateResultsEl.addEventListener('click', start)
+dynamicBoxEl.addEventListener('click', checkIngredient)
+generateResultsEl.click(animate)
+
+
 var user = {
     // cuisine: 'american',
     // diet: document.getElementById('dietType').value,
@@ -58,7 +71,7 @@ function buildParamterString(params) {
 }
 
 function searchRecipies(cuisineType, dietType, includeIngredientsType) {
-    document.getElementById('showMore').setAttribute('style', 'display: show;')
+    showMoreBtnEl.setAttribute('style', 'display: show;')
     const params = {
         cuisine: cuisineType,
         diet: dietType,
@@ -97,21 +110,20 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
             `;
         }
         let rowContent = `<section class="mealData" class="row" >${textContent}</section>`
-        document.getElementById('container').innerHTML = document.getElementById('container').innerHTML + rowContent
+        containerEl.innerHTML = containerEl.innerHTML + rowContent
         totalResultCount = data.totalResults
     })
         //  catches error for if any .then fails, it will return an error
         .catch((err) => console.log('Failed to load', err));
 }
-document.getElementById('showMore').setAttribute('style', 'display: none;')
-document.getElementById('showMore').addEventListener('click', () => {
+function showMoreMeals() {
     offset += 3
     console.log(offset)
     searchRecipies('', user.diet, user.includeIngredients)
     if (totalResultCount === null && offset >= totalResultCount - pageSize) {
-        document.getElementById('showMore').setAttribute('style', 'display: none;')
+        showMoreBtnEl.setAttribute('style', 'display: none;')
     }
-})
+}
 
 function searchWithIngredient(ingredient) {
     user["includeIngredients"] = ingredient
@@ -124,13 +136,13 @@ function clearPastResults() {
     totalResultCount = null
 }
 
-document.getElementById('generateResults').addEventListener('click', () => {
+function start() {
     if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
         return
     }
     clearPastResults()
     searchRecipies('', user.diet, user.includeIngredients)
-})
+}
 
 // gets a fun random cocktail
 function GetDrink() {
@@ -141,13 +153,15 @@ function GetDrink() {
 }
 
 // Event listener to select ingredient buttons
-document.getElementById('dynamicBox').addEventListener('click', function(event) {
+
+function checkIngredient (event) {
     if (event.target.classList.contains('ingredient-button')) {
         toggleSelection(event.target);
     }
-});
+};
 
-$('#generateResults').click(function(e) {
+
+function animate(e) {
     e.preventDefault();
     if (!user.hasOwnProperty('diet' || 'includeIngredients')) {
         return
@@ -155,6 +169,6 @@ $('#generateResults').click(function(e) {
     $('#dynamicBox').animate({
         // 'margin-left' : '-900px'
     });                 
-});
+};
 
 GetDrink()

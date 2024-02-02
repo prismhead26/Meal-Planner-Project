@@ -14,19 +14,28 @@
     </header>
     <div class="container" id="container">
         <div class="row">
-            <div class="box" id="dynamicBox"> <!-- We can simplify the buttons with a loop in javascript if desired. I don't personally mind doing it in HTML, but doing so in Javascript may perhaps be more efficient -- Pat -->
-                <h2>Recipes</h2>
-                <form id="recipeForm">
-                    <div id="searchBar">
-                        <label for="searchText">Cuisines:</label>
-                        <input type="text" id="searchText" name="searchText">
-                    </div>
-                    <label for="typeType">Meal Type:</label> <!-- Breakfast, lunch, dinner selection -->
-                    <div>
-                        <button type="button" class="meal-type-button" onclick="selectMealType('breakfast')">Breakfast</button>
-                        <button type="button" class="meal-type-button" onclick="selectMealType('lunch')">Lunch</button>
-                        <button type="button" class="meal-type-button" onclick="selectMealType('dinner')">Dinner</button>
-                    </div>         
+            <div class="box" id="cuisineBox"> <!-- New box for cuisine selection -->
+                <h2>Select a Cuisine!</h2>
+                <button type="button" class="cuisine-button" onclick="selectCuisine('african')">African</button>
+                <button type="button" class="cuisine-button" onclick="selectCuisine('asian')">Asian</button>
+                <button type="button" class="cuisine-button" onclick="selectCuisine('american')">American</button>
+                <button type="button" class="cuisine-button" onclick="selectCuisine('british')">British</button>
+                <button type="button" class="cuisine-button" onclick="selectCuisine('cajun')">Cajun</button>
+                <button type="button" class="cuisine-button" onclick="selectCuisine('caribbean')">Caribbean</button>
+                <button type="button" class="cuisine-button" onclick="selectCuisine('chinese')">Chinese</button>
+                <button type="button" class="cuisine-button" onclick="selectCuisine('eastern european')">Eastern European</button>
+                <button type="button" class="cuisine-button" onclick="selectCuisine('european')">European</button>
+                <!-- Add more cuisine buttons as needed -->
+                <p>Would you like to add a random drink?</p>
+                <input type="checkbox" id="randomDrinkCheckbox" name="randomDrinkCheckbox">
+                <label for="randomDrinkCheckbox">Yes, please!</label>
+                <button id="buttonContinue" onclick="showIngredients()">Continue to Ingredients</button>
+                <div id="cuisineWarning" style="display: none; color: red;">Must select cuisine before continuing to ingredients</div>
+            </div>
+            <div class="box" id="dynamicBox" style="display: none;"> <!-- We can simplify the buttons with a loop in javascript if desired. I don't personally mind doing it in HTML, but doing so in Javascript may perhaps be more efficient -- Pat -->
+                <button class="back-button" onclick="goBack()">Back</button> <!-- New back button -->
+                <h2 style="clear:both; font-weight: bold;">Recipes</h2>
+                <form id="recipeForm" style="clear:both;">       
                     <label for="dietType">Diet:</label>
                     <select id="dietType" name="dietType" onchange="toggleIngredientButtons()">
                         <option value="common">Common</option>
@@ -37,7 +46,7 @@
                         <option value="primal">Primal</option>
                         <option value="kosher">Kosher</option>
                     </select>
-                <p>Ingredients</p>
+                <p style="font-weight: bold;">Ingredients</p>
                 <div>
                     <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('beef')">Beef</button>
                     <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('chicken')">Chicken</button>
@@ -76,6 +85,16 @@
             }, 0);
             box.style.minHeight = totalHeight + 'px';
         }
+
+        function showIngredients() {
+            document.getElementById('cuisineBox').style.display = 'none';
+            document.getElementById('dynamicBox').style.display = 'block';          
+        }
+
+        function goBack() {
+            document.getElementById('dynamicBox').style.display = 'none';
+            document.getElementById('cuisineBox').style.display = 'block';
+        }     
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./assets/JS/main.js"></script>

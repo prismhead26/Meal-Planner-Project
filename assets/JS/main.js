@@ -27,6 +27,7 @@ clearDataEl.addEventListener('click', clearPastResults);
 let offset = 0;
 let totalResultCount = null;
 const pageSize = 3;
+const maxItems = 15;
 
 const user = {
 };
@@ -194,7 +195,7 @@ function createDrink() {
       const drinkInstructions = drinkData.strInstructions;
       const strIngredient = 'strIngredient'
       let ingredientText = ''
-        for(let i = 1; i < 10; i++) {
+        for(let i = 1; i < maxItems; i++) {
           let string = strIngredient + i
           if (drinkData[string] !== null) {
             // console.log('ingredient number: ',i)
@@ -205,7 +206,7 @@ function createDrink() {
         }
       const strMeasure = 'strMeasure'
       let measureText = ''
-        for(let i = 1; i < 10; i++) {
+        for(let i = 1; i < maxItems; i++) {
           let string = strMeasure + i
           if (drinkData[string] !== null) {
             // console.log('ingredient number: ',i)

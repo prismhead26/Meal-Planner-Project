@@ -137,6 +137,7 @@ function searchWithIngredient(ingredient) {
 
 function selectCuisine(userCuisine) {
     user["cuisine"] = userCuisine
+
     console.log('user cuisine: ',user.cuisine)
 }
 
@@ -151,7 +152,7 @@ function start() {
         return
     }
     clearPastResults()
-    searchRecipies('', user.diet, user.includeIngredients)
+    searchRecipies(user.cuisine, user.diet, user.includeIngredients)
 }
 
 // gets a fun random cocktail

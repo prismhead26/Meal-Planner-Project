@@ -111,7 +111,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
         const instructions = meal.spoonacularSourceUrl;
 
         textContent += `
-                <div id="mealInfo" class=m-3>
+                <div id="mealInfo" class="m-3 is-flex-direction-row is-size-6">
                     <h1>Meal: ${mealTitle}</h1>
                     <img src="${imagesrc}" alt="food image"></img>
                     <p>Ready in ${readyInMinutes} minutes</p>

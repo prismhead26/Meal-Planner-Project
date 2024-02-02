@@ -1,6 +1,6 @@
 // const API_KEY = process.env.API_KEY 
-const API_KEY = '4d568b90635e43f4a627b33131e5f540'
-// const API_KEY = '0e4952ee45974218818a782582391c14'
+// const API_KEY = '4d568b90635e43f4a627b33131e5f540'
+const API_KEY = '0e4952ee45974218818a782582391c14'
 // const API_KEY = 'e755066ea6c044f4b71d08597fba8443'
 
 const BASE_URL = 'https://api.spoonacular.com'
@@ -98,7 +98,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
             const instructions = meal.spoonacularSourceUrl
 
             textContent += `
-                <div id="mealInfo">
+                <div id="mealInfo" class=m-3>
                     <h1>Meal: ${mealTitle}</h1>
                     <img src="${imagesrc}" alt="food image"></img>
                     <p>Ready in ${readyInMinutes} minutes</p>

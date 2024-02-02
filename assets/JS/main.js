@@ -13,6 +13,7 @@ const generateResultsEl = document.getElementById('generateResults')
 const dynamicBoxEl = document.getElementById('dynamicBox')
 const cuisineBoxEl = document.getElementById('cuisineBox')
 const clearDataEl = document.getElementById('clearData')
+const backBtnEl = document.querySelector('.back-button')
 
 showMoreBtnEl.setAttribute('style', 'display: none;')
 
@@ -73,8 +74,11 @@ function buildParamterString(params) {
 }
 
 function searchRecipies(cuisineType, dietType, includeIngredientsType) {
+    
     showMoreBtnEl.setAttribute('style', 'display: show;')
     generateResultsEl.setAttribute('style', 'display: none;')
+    backBtnEl.setAttribute('style', 'display: none;')
+
     const params = {
         cuisine: cuisineType,
         diet: dietType,

@@ -119,7 +119,7 @@ function showMoreMeals() {
     offset += 3
     console.log('offset: ',offset)
     console.log('totalResultCount: ',totalResultCount)
-    searchRecipies('', user.diet, user.includeIngredients)
+    searchRecipies(user.cuisine, user.diet, user.includeIngredients)
     if (offset >= totalResultCount - pageSize) {
         showMoreBtnEl.setAttribute('style', 'display: none;')
     } else {
@@ -132,9 +132,9 @@ function searchWithIngredient(ingredient) {
     console.log('user ingredient: ',user.includeIngredients)
 }
 
-function selectCuisine(cuisineType) {
-    user["includeCuisine"] = cuisineType
-    console.log('user cuisine: ',user.includeCuisine)
+function selectCuisine(userCuisine) {
+    user["cuisine"] = userCuisine
+    console.log('user cuisine: ',user.cuisine)
 }
 
 function clearPastResults() {

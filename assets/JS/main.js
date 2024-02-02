@@ -18,15 +18,13 @@ generateResultsEl.addEventListener('click', start)
 dynamicBoxEl.addEventListener('click', checkIngredient)
 generateResultsEl.addEventListener('click',animate)
 
-
-var user = {
-    // cuisine: 'american',
-    // diet: document.getElementById('dietType').value,
-    // ingredients: 'eggs'
-};
 let offset = 0
 let totalResultCount = null
 const pageSize = 3
+
+var user = {
+};
+
 const DEFAULT_PARAMETERS = {
     apiKey: API_KEY,
     instructionsRequired: true,
@@ -113,12 +111,14 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
         containerEl.innerHTML = containerEl.innerHTML + rowContent
         totalResultCount = data.totalResults
     })
-        //  catches error for if any .then fails, it will return an error
-        .catch((err) => console.log('Failed to load', err));
+    //  catches error for if any .then fails, it will return an error
+    .catch((err) => console.log('Failed to load', err));
 }
+
 function showMoreMeals() {
     offset += 3
-    console.log(offset)
+    console.log('offset: ',offset)
+    console.log('totalResultCount: ',totalResultCount)
     searchRecipies('', user.diet, user.includeIngredients)
     if (totalResultCount === null && offset >= totalResultCount - pageSize) {
         showMoreBtnEl.setAttribute('style', 'display: none;')
@@ -136,7 +136,6 @@ function clearPastResults() {
     totalResultCount = null
 }
 
-
 function start() {
     if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
         return
@@ -153,14 +152,11 @@ function GetDrink() {
     .then(console.log)
 }
 
-// Event listener to select ingredient buttons
-
 function checkIngredient (event) {
     if (event.target.classList.contains('ingredient-button')) {
         toggleSelection(event.target);
     }
 };
-
 
 function animate(e) {
     e.preventDefault();

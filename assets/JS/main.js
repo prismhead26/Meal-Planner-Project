@@ -130,6 +130,11 @@ function searchWithIngredient(ingredient) {
     console.log('user ingredient: ',user.includeIngredients)
 }
 
+function selectCuisine(cuisineType) {
+    user["includeCuisine"] = cuisineType
+    console.log('user cuisine: ',user.includeCuisine)
+}
+
 function clearPastResults() {
     $(".mealData").removeClass();
     offset = 0

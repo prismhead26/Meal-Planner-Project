@@ -16,7 +16,7 @@ showMoreBtnEl.setAttribute('style', 'display: none;')
 showMoreBtnEl.addEventListener('click', showMoreMeals)
 generateResultsEl.addEventListener('click', start)
 dynamicBoxEl.addEventListener('click', checkIngredient)
-generateResultsEl.click(animate)
+generateResultsEl.addEventListener('click',animate)
 
 
 var user = {
@@ -135,6 +135,7 @@ function clearPastResults() {
     offset = 0
     totalResultCount = null
 }
+
 
 function start() {
     if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {

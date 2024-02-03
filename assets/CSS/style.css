@@ -179,7 +179,12 @@ button#generateResults:hover {
 .drinkFontColor, .foodFontColor {
     color: #77ccae;
 }
-
+.foodLink {
+    text-align: center;
+    color: #77ccae;
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
 
 @media (max-width: 768px) {
     h1 {

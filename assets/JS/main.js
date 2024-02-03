@@ -119,7 +119,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
                     <img src="${imagesrc}" alt="food image" class= "image is-128x128"></img>
                     <p class="foodFontColor">Ready in ${readyInMinutes} minutes</p>
                     <p class="foodFontColor">Servings: ${servings}</p> 
-                    <a href='${instructions}' class="foodFontColor">Instructions Link</a>
+                    <a target="_blank" rel="noopener" href='${instructions}' class="foodLink">Instructions Link</a>
                 </div>
             `;
       }

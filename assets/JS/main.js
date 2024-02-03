@@ -215,7 +215,7 @@ function createDrink() {
         <h1>${drinkTitle}</h1>
         <img src="${imagesrc}" alt="cocktail image" style="max-Width: 15%;"></img>
         <p class="drinkFontColor">Instructions: ${drinkInstructions}</p>
-        <li class="drinkFontcolor">Ingredients: ${ingredientText}</li>
+        <li class="drinkFontcolor" style="color: #77ccae;">Ingredients: ${ingredientText}</li>
         <li class="drinkFontColor">Measurements: ${measureText}</li>
     `;
       const rowContent = `<section class="drinkData" class="row" >${textContent}</section>`;

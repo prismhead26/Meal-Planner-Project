@@ -79,6 +79,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
   showMoreBtnEl.setAttribute('style', 'display: show;');
   generateResultsEl.setAttribute('style', 'display: none;');
   backBtnEl.setAttribute('style', 'display: none;');
+  drinkContainerEl.setAttribute('style','display: show;')
 
   const params = {
     cuisine: cuisineType,
@@ -219,6 +220,7 @@ function createDrink() {
     `;
       const rowContent = `<section class="drinkData" class="row" >${textContent}</section>`;
       drinkContainerEl.innerHTML += rowContent;
+      drinkContainerEl.setAttribute('style','display: none;')
     });
 }
 

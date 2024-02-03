@@ -24,6 +24,8 @@ dynamicBoxEl.addEventListener('click', checkIngredient);
 generateResultsEl.addEventListener('click', animate);
 clearDataEl.addEventListener('click', clearPastResults);
 
+$('#randomDrinkCheckbox').change(checkBoxInit)
+
 let offset = 0;
 let totalResultCount = null;
 const pageSize = 3;
@@ -166,20 +168,13 @@ function start() {
   searchRecipies(user.cuisine, user.diet, user.includeIngredients);
 }
 
-$(document).ready(function () {
-  // set initial state.
-  $('#randomDrinkCheckbox').val(this.checked);
-
-  $('#randomDrinkCheckbox').change(function () {
-    if (!this.checked) {
-      $('.drinkData').removeClass();
+function checkBoxInit() {
+  if (!this.checked) {
     } else {
-      $(this).prop('checked');
+      drinkContainerEl.innerHTML = ''
       createDrink();
     }
-    // $('#randomDrinkCheckbox').val(!this.checked);
-  });
-});
+};
 
 // gets a fun random cocktail
 function createDrink() {

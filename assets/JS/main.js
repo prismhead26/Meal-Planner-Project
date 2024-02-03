@@ -213,7 +213,7 @@ function createDrink() {
         }
       const textContent = `
         <h1>${drinkTitle}</h1>
-        <img src="${imagesrc}" alt="cocktail image" style="max-Width: 15%;"></img>
+        <img src="${imagesrc}" alt="cocktail image" class= "image is-128x128"></img>
         <p class="drinkFontColor">Instructions: ${drinkInstructions}</p>
         <li class="drinkFontcolor" style="color: #77ccae;">Ingredients: ${ingredientText}</li>
         <li class="drinkFontColor">Measurements: ${measureText}</li>

@@ -119,7 +119,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
                     <img src="${imagesrc}" alt="food image" class= "image is-128x128"></img>
                     <p class="foodFontColor">Ready in ${readyInMinutes} minutes</p>
                     <p class="foodFontColor">Servings: ${servings}</p> 
-                    <a target="_blank" rel="noopener" href='${instructions}' class="foodLink">Instructions Link</a>
+                    <a target="_blank" rel="noopener" href='${instructions}' class="foodLink has-text-centered">Instructions Link</a>
                 </div>
             `;
       }
@@ -213,7 +213,7 @@ function createDrink() {
         }
       const textContent = `
         <h1>${drinkTitle}</h1>
-        <img src="${imagesrc}" alt="cocktail image" class= "image is-128x128"></img>
+        <img src="${imagesrc}" alt="cocktail image" class= "image is-128x128 is-justify-content-center"></img>
         <p class="drinkFontColor">Instructions: ${drinkInstructions}</p>
         <li class="drinkFontcolor" style="color: #77ccae;">Ingredients: ${ingredientText}</li>
         <li class="drinkFontColor">Measurements: ${measureText}</li>
@@ -235,7 +235,4 @@ function animate(e) {
   if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
     return;
   }
-  $('#dynamicBox').animate({
-    // 'margin-left' : '-900px'
-  });
-}
+  };

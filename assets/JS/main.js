@@ -24,6 +24,8 @@ dynamicBoxEl.addEventListener('click', checkIngredient);
 generateResultsEl.addEventListener('click', animate);
 clearDataEl.addEventListener('click', clearPastResults);
 
+$('#randomDrinkCheckbox').change(checkBoxInit)
+
 let offset = 0;
 let totalResultCount = null;
 const pageSize = 3;
@@ -77,6 +79,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
   showMoreBtnEl.setAttribute('style', 'display: show;');
   generateResultsEl.setAttribute('style', 'display: none;');
   backBtnEl.setAttribute('style', 'display: none;');
+  drinkContainerEl.setAttribute('style','display: show;')
 
   const params = {
     cuisine: cuisineType,
@@ -116,7 +119,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
                     <img src="${imagesrc}" alt="food image" class= "image is-128x128"></img>
                     <p class="foodFontColor">Ready in ${readyInMinutes} minutes</p>
                     <p class="foodFontColor">Servings: ${servings}</p> 
-                    <a href='${instructions}' class="foodFontColor">Instructions Link</a>
+                    <a target="_blank" rel="noopener" href='${instructions}' class="foodLink">Instructions Link</a>
                 </div>
             `;
       }
@@ -166,20 +169,13 @@ function start() {
   searchRecipies(user.cuisine, user.diet, user.includeIngredients);
 }
 
-$(document).ready(function () {
-  // set initial state.
-  $('#randomDrinkCheckbox').val(this.checked);
-
-  $('#randomDrinkCheckbox').change(function () {
-    if (!this.checked) {
-      $('.drinkData').removeClass();
+function checkBoxInit() {
+  if (!this.checked) {
     } else {
-      $(this).prop('checked');
+      drinkContainerEl.innerHTML = ''
       createDrink();
     }
-    // $('#randomDrinkCheckbox').val(!this.checked);
-  });
-});
+};
 
 // gets a fun random cocktail
 function createDrink() {
@@ -217,13 +213,14 @@ function createDrink() {
         }
       const textContent = `
         <h1>${drinkTitle}</h1>
-        <img src="${imagesrc}" alt="cocktail image" style="max-Width: 15%;"></img>
+        <img src="${imagesrc}" alt="cocktail image" class= "image is-128x128"></img>
         <p class="drinkFontColor">Instructions: ${drinkInstructions}</p>
-        <li class="drinkFontcolor">Ingredients: ${ingredientText}</li>
+        <li class="drinkFontcolor" style="color: #77ccae;">Ingredients: ${ingredientText}</li>
         <li class="drinkFontColor">Measurements: ${measureText}</li>
     `;
       const rowContent = `<section class="drinkData" class="row" >${textContent}</section>`;
       drinkContainerEl.innerHTML += rowContent;
+      drinkContainerEl.setAttribute('style','display: none;')
     });
 }
 

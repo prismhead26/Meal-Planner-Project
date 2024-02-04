@@ -3,7 +3,7 @@ body, h1 {
     padding: 0;
 }
 
-body {
+body, html {
     background-color: #333333; 
     font-family: Arial, sans-serif; 
 }
@@ -179,7 +179,12 @@ button#generateResults:hover {
 .drinkFontColor, .foodFontColor {
     color: #77ccae;
 }
-
+.foodLink {
+    text-align: center;
+    color: #77ccae;
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
 
 @media (max-width: 768px) {
     h1 {

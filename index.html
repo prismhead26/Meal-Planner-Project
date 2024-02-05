@@ -10,42 +10,42 @@
 </head>
 <body>
     <header>
-        <h1>🍔 Plan Your Meals 🍔</h1>
+        <h1 class="has-background-primary p-3">🍔 Plan Your Meals 🍔</h1>
     </header>
     <div class="container" id="container">
         <div class="row">
-            <div class="box" id="cuisineBox"> <!-- New box for cuisine selection -->
+            <div class="box has-background-primary" id="cuisineBox"> <!-- New box for cuisine selection -->
                 <h2>Select a Cuisine!</h2>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('african')">African</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('asian')">Asian</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('american')">American</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('british')">British</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('cajun')">Cajun</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('caribbean')">Caribbean</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('chinese')">Chinese</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('french')">French</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('german')">German</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('greek')">Greek</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('indian')">Indian</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('italian')">Italian</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('japanese')">Japanese</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('jewish')">Jewish</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('korean')">Korean</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('mexican')">Mexican</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('middle eastern')">Middle Eastern</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('nordic')">Nordic</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('southern')">Southern</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('spanish')">Spanish</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('thai')">Thai</button>
-                <button type="button" class="cuisine-button" onclick="selectCuisine('vietnamese')">Vietnamese</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('african')">African</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('asian')">Asian</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('american')">American</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('british')">British</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('cajun')">Cajun</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('caribbean')">Caribbean</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('chinese')">Chinese</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('french')">French</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('german')">German</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('greek')">Greek</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('indian')">Indian</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('italian')">Italian</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('japanese')">Japanese</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('jewish')">Jewish</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('korean')">Korean</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('mexican')">Mexican</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('middle eastern')">Middle Eastern</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('nordic')">Nordic</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('southern')">Southern</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('spanish')">Spanish</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('thai')">Thai</button>
+                <button type="button" class="cuisine-button has-background-primary-dark" onclick="selectCuisine('vietnamese')">Vietnamese</button>
                 <!-- Add more cuisine buttons as needed -->
                 <p>Would you like to add a random drink?</p>
                 <input type="checkbox" id="randomDrinkCheckbox" name="randomDrinkCheckbox">
                 <label for="randomDrinkCheckbox">Yes, please!</label>
-                <button id="buttonContinue" onclick="showIngredients()">Continue to Ingredients</button>
+                <button class="has-background-primary-dark" id="buttonContinue" onclick="showIngredients()">Continue to Ingredients</button>
                 <div id="cuisineWarning" style="display: none; color: red; clear:both;">Must select cuisine before continuing to ingredients</div>
             </div>
-            <div class="box is-align-content-center" id="dynamicBox" style="display: none;"> <!-- We can simplify the buttons with a loop in javascript if desired. I don't personally mind doing it in HTML, but doing so in Javascript may perhaps be more efficient -- Pat -->
+            <div class="box is-align-content-center has-background-primary" id="dynamicBox" style="display: none;"> <!-- We can simplify the buttons with a loop in javascript if desired. I don't personally mind doing it in HTML, but doing so in Javascript may perhaps be more efficient -- Pat -->
                 <button class="back-button" onclick="goBack()">Back</button> <!-- New back button -->
                 <h2 style="clear:both; font-weight: bold;">Recipes</h2>
                 <form id="recipeForm" style="clear:both;">       
@@ -63,38 +63,38 @@
                 <p style="font-weight: bold;">Ingredients</p>
                 <div>
                     <!-- Meats! -->
-                    <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('beef')">Beef</button>
-                    <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('chicken')">Chicken</button>
-                    <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('steak')">Steak</button>
-                    <button type="button" class="ingredient-button" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('bacon')">Bacon</button>
-                    <button type="button" class="ingredient-button" data-diet="primal,gluten" onclick="searchWithIngredient('pork')">Pork</button>
-                    <button type="button" class="ingredient-button" data-diet="primal,gluten,pescatarian" onclick="searchWithIngredient('fish')">Fish</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('beef')">Beef</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('chicken')">Chicken</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('steak')">Steak</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="primal,gluten,kosher" onclick="searchWithIngredient('bacon')">Bacon</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="primal,gluten" onclick="searchWithIngredient('pork')">Pork</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="primal,gluten,pescatarian" onclick="searchWithIngredient('fish')">Fish</button>
                     <!-- Animal Products!-->
-                    <button type="button" class="ingredient-button" data-diet="primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('egg')">Egg</button>
-                    <button type="button" class="ingredient-button" data-diet="primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('cheese')">Cheese</button>
-                    <button type="button" class="ingredient-button" data-diet="primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('yogurt')">Yogurt</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('egg')">Egg</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('cheese')">Cheese</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('yogurt')">Yogurt</button>
                     <!-- Grains -->
-                    <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('rice')">Rice</button>
-                    <button type="button" class="ingredient-button" data-diet="vegan,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('pasta')">Pasta</button>
-                    <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,kosher" onclick="searchWithIngredient('bulgur')">Bulgur</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('rice')">Rice</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="vegan,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('pasta')">Pasta</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="vegan,primal,vegetarian,pescatarian,kosher" onclick="searchWithIngredient('bulgur')">Bulgur</button>
                     <!-- Vegetables -->
-                    <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tofu')">Tofu</button>
-                    <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('beans')">Beans</button>
-                    <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tomato')">Tomato</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tofu')">Tofu</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('beans')">Beans</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('tomato')">Tomato</button>
                     <!-- Fruits -->
-                    <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('apple')">Apple</button>
-                    <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('grape')">Grape</button>
-                    <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('banana')">Banana</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('apple')">Apple</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('grape')">Grape</button>
+                    <button type="button" class="ingredient-button has-background-primary-dark" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('banana')">Banana</button>
                 </div>
-                <button id="generateResults">Show Me Recipes</button>
-                <button id="clearData">Create a new meal</button>
+                <button class="has-background-primary-dark" id="generateResults">Show Me Recipes</button>
+                <button class="has-background-primary-dark" id="clearData">Create a new meal</button>
                 </form>
             </div>
             <div id="drinkContainer"></div>
         </div>
     </div>
 
-    <button id="showMore">Show More</button>
+    <button class="has-background-primary-dark" id="showMore">Show More</button>
     <script>
         function setBoxSize() {
             const box = document.getElementById('dynamicBox')

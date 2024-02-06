@@ -21,7 +21,7 @@ You and your group will use everything you’ve learned over the past six module
 ```md
 AS a person who wants planned meals
 I WANT to be able input my diet information and choose certain ingredients
-SO THAT I can get a meal plans for breakfast, lunch, or dinner.
+SO THAT I can get a meal plan for dinner.
 And to be able to get a random cocktail to quench said thirst.
 ```
 
@@ -100,4 +100,4 @@ Aiden Wahed : [GitHub](https://github.com/prismhead26)
 Patrick Bowen : [GitHub](https://github.com/PatrickRBowen)
 <br>
 
-Anna Jantzen: [GitHub](https://github.com/aejantz2015)
+Anna Jantzen : [GitHub](https://github.com/aejantz2015)

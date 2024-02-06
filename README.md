@@ -1,8 +1,5 @@
 # Meal-Planner-Project
 
-## Description:
-
-
 ## Table of Contents:
 - [Overview](#Overview)
 - [The Challenge](#The-Challenge)
@@ -58,8 +55,10 @@ SO THAT I can get a 7-day meal plan for breakfast, lunch, and dinner.
 [Solution URL Link:]()
 
 ## Screenshots:
+![alt text](/assets/images/screenshot.png)
+<br>
 
-
+![alt text](/assets/images/screenshotResult.png)
 
 ## Installation Process
 1. Clone the Repository from GitHub 
@@ -77,9 +76,17 @@ SO THAT I can get a 7-day meal plan for breakfast, lunch, and dinner.
 ## What We Learned
 
 
-## License & Copyright ©
+## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [Open Source Initiative Link](https://opensource.org/licenses/MIT)
 
 
 ## Authors
+
+Aiden Wahed : [GitHub](https://github.com/prismhead26)
+<br>
+
+Patrick Bowen : [GitHub](https://github.com/PatrickRBowen)
+<br>
+
+Anna Jantzen: [GitHub](https://github.com/aejantz2015)

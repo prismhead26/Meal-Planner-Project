@@ -24,7 +24,7 @@ main {
 }
 
 button {
-    background-color: #68c3a3; 
+    background-color: #348678; 
     color: #fff; 
     border: none;
     padding: 10px 20px;
@@ -33,7 +33,7 @@ button {
 }
 
 button:hover {
-    background-color: #5ba48a; 
+    background-color: #4f937b; 
 }
 
 a {
@@ -66,7 +66,7 @@ a:hover {
 }
 
 .ingredient-button {
-    /* background-color: #68c3a3; */
+    background-color: #348678;;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -77,14 +77,14 @@ a:hover {
 }
 
 .ingredient-button.selected {
-    /* background-color: #68c3a3; */
+    background-color: #2b6e63;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
     outline: none;
-    background-color: #5ba48a;
+    /* background-color: #5ba48a; */
 } 
 
 .row {
@@ -92,7 +92,7 @@ a:hover {
 }
 
 button#generateResults {
-    background-color: #68c3a3;
+    background-color: #348678;;
     color: #fff;
     border: 1px solid #fff;
     padding: 10px 20px;
@@ -103,7 +103,7 @@ button#generateResults {
 }
 
 button#buttonContinue {
-    background-color: #68c3a3;
+    background-color: #348678;;
     color: #fff;
     border: 1px solid #fff;
     padding: 10px 20px;
@@ -144,7 +144,7 @@ button#generateResults:hover {
 } 
 
 .cuisine-button {
-    background-color: #68c3a3;
+    background-color: #348678;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -155,14 +155,14 @@ button#generateResults:hover {
 }
 
 .cuisine-button.selected {
-    background-color: #68c3a3;
+    background-color: #2b6e63;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
     outline: none;
-    background-color: #5ba48a;
+    /* background-color: #5ba48a; */
 }
 
 #cuisineBox {

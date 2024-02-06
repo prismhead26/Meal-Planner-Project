@@ -194,8 +194,9 @@ function clearPastResults() {
 // init function with guard statement to ensure user selects all btns
 function start() {
   if (!user.hasOwnProperty('cuisine') || !user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
-    return;
+    return $('#warning').text('Must select a choice for each type!')
   }
+  $('#warning').text('')
   // clearPastResults()
   setAttr()
   searchRecipies(user.cuisine, user.diet, user.includeIngredients);

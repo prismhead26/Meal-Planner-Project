@@ -60,7 +60,6 @@ SO THAT I can get a 7-day meal plan for breakfast, lunch, and dinner.
 
 ![alt text](/assets/images/screenshotResult.png)
 
-
 ## Installation Process
 1. Clone the Repository from GitHub 
 2. (or) Download Zip Folder from Repository from GitHub 

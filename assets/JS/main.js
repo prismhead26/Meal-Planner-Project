@@ -109,6 +109,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
                   const meal = data.results[i];
                   const mealTitle = meal.title;
                   const imagesrc = meal.image;
+                  // destructiring assignment --- destructuring data obj and create var based on data
                   const { readyInMinutes } = meal;
                   const { servings } = meal;
                   const instructions = meal.spoonacularSourceUrl;

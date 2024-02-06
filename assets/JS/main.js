@@ -196,7 +196,7 @@ function createDrink() {
           if (drinkData[string] !== null) {
             // console.log('ingredient number: ',i)
             // console.log('ingredient: ',drinkData[string])
-            ingredientText += ( drinkData[string] + ', ')
+            ingredientText += (`<li>${drinkData[string]}</li>`)
           }
 
         }
@@ -207,7 +207,8 @@ function createDrink() {
           if (drinkData[string] !== null) {
             // console.log('ingredient number: ',i)
             // console.log('measure: ',drinkData[string])
-            measureText += ( drinkData[string] + ', ')
+            measureText += (`<li>${drinkData[string]}</li>`)
+            console.log('measureText: ', measureText)
           }
 
         }

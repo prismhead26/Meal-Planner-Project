@@ -61,7 +61,7 @@ And to be able to get a random cocktail to quench said thirst.
 8. In order to restart the application, press the "Create a new meal" button to reset to the beginning.
 
 ## Solution URL:
-[Solution URL Link:]()
+[Solution URL Link to Live Application:](https://prismhead26.github.io/Meal-Planner-Project/)
 
 ## Screenshots:
 ![alt text](/assets/images/screenshot.png)

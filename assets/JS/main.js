@@ -16,36 +16,34 @@ const backBtnEl = document.querySelector('.back-button');
 const drinkContainerEl = document.querySelector('#drinkContainer');
 
 showMoreBtnEl.setAttribute('style', 'display: none;');
-
+// btn event listeners
 showMoreBtnEl.addEventListener('click', showMoreMeals);
 generateResultsEl.addEventListener('click', start);
 dynamicBoxEl.addEventListener('click', checkIngredient);
 generateResultsEl.addEventListener('click', animate);
 clearDataEl.addEventListener('click', clearPastResults);
-
+// checkbox listener
 $('#randomDrinkCheckbox').change(checkBoxInit)
 
 let offset = 0;
 let totalResultCount = null;
 const pageSize = 3;
 const maxItems = 15;
-
+//  create empty user obj
 const user = {
 };
-
+// create default parameters for the food api
 const DEFAULT_PARAMETERS = {
   apiKey: API_KEY,
   instructionsRequired: true,
   addRecipeInformation: true,
   number: pageSize,
 };
-
+// create dropdown btns and add user input to userObj
 function toggleIngredientButtons() {
   const dietType = document.getElementById('dietType').value;
-  console.log('Selected diet type:', dietType);
   // creates key:value pair for user obj
   user.diet = dietType;
-  console.log(user.diet);
   document.querySelectorAll('.ingredient-button').forEach((button) => {
     const buttonD = button.dataset.diet.split(',');
     if (dietType === 'common') {
@@ -61,7 +59,7 @@ function toggleIngredientButtons() {
 function toggleSelection(button) {
   button.classList.toggle('selected');
 }
-
+// build query strings based of the key:value pair for user + default params
 function buildParamterString(params) {
   // Covert object to array of arrays
   // Replace each array item with string 'key=value'
@@ -72,7 +70,7 @@ function buildParamterString(params) {
       return `${key}=${value}`;
     }).join('&');
 }
-
+// main function to fetch meal data based on params
 function searchRecipies(cuisineType, dietType, includeIngredientsType) {
   showMoreBtnEl.setAttribute('style', 'display: show;');
   generateResultsEl.setAttribute('style', 'display: none;');
@@ -128,7 +126,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
     //  catches error for if any .then fails, it will return an error
     .catch((err) => console.log('Failed to load', err));
 }
-
+// showMoreMeals increasing the offset of the data until data runs out
 function showMoreMeals() {
   offset += 3;
 
@@ -139,22 +137,22 @@ function showMoreMeals() {
     console.assert(offset % 3 === 0, 'Remainder !=0');
   }
 }
-
+// create user key:value pair
 function searchWithIngredient(ingredient) {
   user.includeIngredients = ingredient;
 }
-
+// create user key:value pair
 function selectCuisine(userCuisine) {
   user.cuisine = userCuisine;
 }
-
+// remove newly created elements with btn to reset application
 function clearPastResults() {
   $('.mealData').removeClass();
   $('.drinkData').removeClass();
   offset = 0;
   totalResultCount = null;
 }
-
+// init function with guard statement to ensure user selects all btns
 function start() {
   if (!user.hasOwnProperty('cuisine') || !user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
     return;
@@ -162,7 +160,7 @@ function start() {
   // clearPastResults()
   searchRecipies(user.cuisine, user.diet, user.includeIngredients);
 }
-
+// init function for fetching cocktail data through checkbot
 function checkBoxInit() {
   if (!this.checked) {
     } else {
@@ -213,13 +211,13 @@ function createDrink() {
       drinkContainerEl.setAttribute('style','display: none;')
     });
 }
-
+// target selector for ingredient btns
 function checkIngredient(event) {
   if (event.target.classList.contains('ingredient-button')) {
     toggleSelection(event.target);
   }
 }
-
+// animate application container
 function animate(e) {
   e.preventDefault();
   if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {

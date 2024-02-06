@@ -196,7 +196,7 @@ function createDrink() {
           if (drinkData[string] !== null) {
             // console.log('ingredient number: ',i)
             // console.log('ingredient: ',drinkData[string])
-            ingredientText += ( drinkData[string] + ', ')
+            ingredientText += (`<li class="has-text-primary">${drinkData[string]}</li>`)
           }
 
         }
@@ -207,7 +207,8 @@ function createDrink() {
           if (drinkData[string] !== null) {
             // console.log('ingredient number: ',i)
             // console.log('measure: ',drinkData[string])
-            measureText += ( drinkData[string] + ', ')
+            measureText += (`<li class="has-text-primary">${drinkData[string]}</li>`)
+            console.log('measureText: ', measureText)
           }
 
         }
@@ -215,8 +216,12 @@ function createDrink() {
         <h1>${drinkTitle}</h1>
         <img src="${imagesrc}" alt="cocktail image" class= "image is-128x128 is-justify-content-center"></img>
         <p class="has-text-primary">Instructions: ${drinkInstructions}</p>
+        <div class="column">
         <li class="has-text-primary style="color: #77ccae;">Ingredients: ${ingredientText}</li>
+        </div>
+        <div class="column">
         <li class="has-text-primary">Measurements: ${measureText}</li>
+        </div>
     `;
       const rowContent = `<section class="drinkData" class="row" >${textContent}</section>`;
       drinkContainerEl.innerHTML += rowContent;

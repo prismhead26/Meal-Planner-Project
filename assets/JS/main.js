@@ -77,56 +77,73 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
   showMoreBtnEl.setAttribute('style', 'display: show;');
   generateResultsEl.setAttribute('style', 'display: none;');
   backBtnEl.setAttribute('style', 'display: none;');
-  drinkContainerEl.setAttribute('style','display: show;')
+  drinkContainerEl.setAttribute('style', 'display: show;');
 
   const params = {
-    cuisine: cuisineType,
-    diet: dietType,
-    includeIngredients: includeIngredientsType,
-    offset,
+      cuisine: cuisineType,
+      diet: dietType,
+      includeIngredients: includeIngredientsType,
+      offset,
 
-    ...DEFAULT_PARAMETERS,
+      ...DEFAULT_PARAMETERS,
   };
   console.log('Params: ', params);
   const url = `${BASE_URL}${recipeSearchPath}?${buildParamterString(params)}`;
   fetch(url)
-    .then((res) => res.json())
-    // data results
-    .then((data) => {
-      console.log(data);
-      if (data.totalResults === 0) {
-        containerEl.innerHTML = `${containerEl.innerHTML}<p style="color: red;" >No meals found! Try again.</p>`;
-        showMoreBtnEl.setAttribute('style', 'display: none;');
-        return;
-      }
+      .then((res) => res.json())
+      .then((data) => {
+          console.log(data);
+          if (data.totalResults === 0) {
+              containerEl.innerHTML = `${containerEl.innerHTML}<p style="color: red;" >No meals found! Try again.</p>`;
+              showMoreBtnEl.setAttribute('style', 'display: none;');
+              return;
+          }
 
-      // for loop runs through all results and displays via DOM per div:mealInfo
-      let textContent = '';
-      for (let i = 0; i < data.results.length; i++) {
-        // get meal information from data
-        const meal = data.results[i];
-        const mealTitle = meal.title;
-        const imagesrc = meal.image;
-        const { readyInMinutes } = meal;
-        const { servings } = meal;
-        const instructions = meal.spoonacularSourceUrl;
+          // Create a new container for recipes if total displayed recipes < 6
+          if (containerEl.querySelectorAll('.recipe-container').length < 2) {
+              const recipeContainer = document.createElement('div');
+              recipeContainer.classList.add('recipe-container', 'has-background-primary');
 
-        textContent += `
-                <div id="mealInfo" class="m-3 is-size-6">
-                    <h1>Meal: ${mealTitle}</h1>
-                    <img src="${imagesrc}" alt="food image" class= "image is-128x128"></img>
-                    <p class="has-text-primary">Ready in ${readyInMinutes} minutes</p>
-                    <p class="has-text-primary">Servings: ${servings}</p> 
-                    <a target="_blank" rel="noopener" href='${instructions}' class="foodLink has-text-centered">Instructions Link</a>
-                </div>
-            `;
-      }
-      const rowContent = `<section class="mealData" class="columns" >${textContent}</section>`;
-      containerEl.innerHTML += rowContent;
-      totalResultCount = data.totalResults;
-    })
-    //  catches error for if any .then fails, it will return an error
-    .catch((err) => console.log('Failed to load', err));
+              // Loop through the data and generate recipe content
+              let textContent = '';
+              for (let i = 0; i < data.results.length; i++) {
+                  // Generate content for each recipe
+                  const meal = data.results[i];
+                  const mealTitle = meal.title;
+                  const imagesrc = meal.image;
+                  const { readyInMinutes } = meal;
+                  const { servings } = meal;
+                  const instructions = meal.spoonacularSourceUrl;
+
+                  textContent += `
+                      <div id="mealInfo" class="m-3 is-size-6">
+                          <h1>Meal: ${mealTitle}</h1>
+                          <img src="${imagesrc}" alt="food image" class= "image is-128x128"></img>
+                          <p class="has-text-primary">Ready in ${readyInMinutes} minutes</p>
+                          <p class="has-text-primary">Servings: ${servings}</p> 
+                          <a target="_blank" rel="noopener" href='${instructions}' class="foodLink has-text-centered">Instructions Link</a>
+                      </div>
+                  `;
+              }
+
+              // Append the recipe content to the recipe container
+              recipeContainer.innerHTML = textContent;
+
+              // Append the recipe container to the containerEl
+              containerEl.appendChild(recipeContainer);
+          }
+
+          totalResultCount = data.totalResults;
+
+          // Show "Create a new meal" button after recipes have been generated
+          clearDataEl.style.display = 'block';
+
+          // Hide "Show More" button if total displayed recipes >= 6
+          if (containerEl.querySelectorAll('.recipe-container').length >= 2) {
+              showMoreBtnEl.setAttribute('style', 'display: none;');
+          }
+      })
+      .catch((err) => console.log('Failed to load', err));
 }
 
 function showMoreMeals() {
@@ -146,6 +163,11 @@ function searchWithIngredient(ingredient) {
 
 function selectCuisine(userCuisine) {
   user.cuisine = userCuisine;
+  const cuisineButtons = document.querySelectorAll('.cuisine-button');
+  cuisineButtons.forEach(button => {
+    button.classList.remove('selected'); // Remove 'selected' class from all cuisine buttons
+  });
+  event.target.classList.add('selected'); // Add 'selected' class to the clicked cuisine button
 }
 
 function clearPastResults() {

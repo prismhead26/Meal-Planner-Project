@@ -31,6 +31,7 @@ const pageSize = 3;
 const maxItems = 15;
 //  create empty user obj
 const user = {
+  includeIngredients: []
 };
 // create default parameters for the food api
 const DEFAULT_PARAMETERS = {
@@ -154,7 +155,7 @@ function showMoreMeals() {
 }
 // create user key:value pair
 function searchWithIngredient(ingredient) {
-  user.includeIngredients = ingredient;
+  user.includeIngredients.push(ingredient)
 }
 // create user key:value pair
 function selectCuisine(userCuisine) {

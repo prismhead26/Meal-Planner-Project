@@ -11,7 +11,6 @@ const containerEl = document.getElementById('container');
 const showMoreBtnEl = document.getElementById('showMore');
 const generateResultsEl = document.getElementById('generateResults');
 const dynamicBoxEl = document.getElementById('dynamicBox');
-// const cuisineBoxEl = document.getElementById('cuisineBox');
 const clearDataEl = document.getElementById('clearData');
 const backBtnEl = document.querySelector('.back-button');
 const drinkContainerEl = document.querySelector('#drinkContainer');
@@ -49,7 +48,6 @@ function toggleIngredientButtons() {
   console.log(user.diet);
   document.querySelectorAll('.ingredient-button').forEach((button) => {
     const buttonD = button.dataset.diet.split(',');
-    // console.log("Button diets:", buttonD);
     if (dietType === 'common') {
       button.style.display = 'inline-block';
     } else if (buttonD.includes(dietType)) {
@@ -133,8 +131,7 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
 
 function showMoreMeals() {
   offset += 3;
-  console.log('offset: ', offset);
-  console.log('totalResultCount: ', totalResultCount);
+
   searchRecipies(user.cuisine, user.diet, user.includeIngredients);
   if (offset >= totalResultCount - pageSize) {
     showMoreBtnEl.setAttribute('style', 'display: none;');
@@ -145,13 +142,10 @@ function showMoreMeals() {
 
 function searchWithIngredient(ingredient) {
   user.includeIngredients = ingredient;
-  console.log('user ingredient: ', user.includeIngredients);
 }
 
 function selectCuisine(userCuisine) {
   user.cuisine = userCuisine;
-
-  console.log('user cuisine: ', user.cuisine);
 }
 
 function clearPastResults() {
@@ -162,7 +156,7 @@ function clearPastResults() {
 }
 
 function start() {
-  if (!user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
+  if (!user.hasOwnProperty('cuisine') || !user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
     return;
   }
   // clearPastResults()
@@ -183,8 +177,6 @@ function createDrink() {
   fetch(drinkUrl)
     .then((res) => res.json())
     .then((data) => {
-      console.log('drink obj: ', data);
-      console.log('drink Title: ', data.drinks[0].strDrink);
       const drinkData = data.drinks[0];
       const drinkTitle = drinkData.strDrink;
       const imagesrc = drinkData.strDrinkThumb;
@@ -194,23 +186,16 @@ function createDrink() {
         for(let i = 1; i < maxItems; i++) {
           let string = strIngredient + i
           if (drinkData[string] !== null) {
-            // console.log('ingredient number: ',i)
-            // console.log('ingredient: ',drinkData[string])
             ingredientText += (`<li class="has-text-primary">${drinkData[string]}</li>`)
           }
-
         }
       const strMeasure = 'strMeasure'
       let measureText = ''
         for(let i = 1; i < maxItems; i++) {
           let string = strMeasure + i
           if (drinkData[string] !== null) {
-            // console.log('ingredient number: ',i)
-            // console.log('measure: ',drinkData[string])
             measureText += (`<li class="has-text-primary">${drinkData[string]}</li>`)
-            console.log('measureText: ', measureText)
           }
-
         }
       const textContent = `
         <h1>${drinkTitle}</h1>

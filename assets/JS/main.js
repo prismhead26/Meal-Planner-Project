@@ -15,6 +15,7 @@ const clearDataEl = document.getElementById('clearData');
 const backBtnEl = document.querySelector('.back-button');
 const drinkContainerEl = document.querySelector('#drinkContainer');
 const pastEl = document.getElementById('past')
+const lastMealBtn = document.getElementById('secondUser')
 
 showMoreBtnEl.setAttribute('style', 'display: none;');
 // btn event listeners
@@ -23,6 +24,7 @@ generateResultsEl.addEventListener('click', start);
 dynamicBoxEl.addEventListener('click', checkIngredient);
 generateResultsEl.addEventListener('click', animate);
 clearDataEl.addEventListener('click', clearPastResults);
+lastMealBtn.addEventListener('click', getHistory)
 // checkbox listener
 $('#randomDrinkCheckbox').change(checkBoxInit)
 
@@ -147,8 +149,10 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
       })
       .catch((err) => console.log('Failed to load', err));
 }
-document.getElementById('secondUser').addEventListener('click', getHistory)
+
 function getHistory() {
+  lastMealBtn.disabled = true
+  createDrink()
   showIngredients()
   showNewMealButton()
   const lastMeal = JSON.parse(localStorage.getItem('pastResults'))
@@ -172,8 +176,7 @@ function searchWithIngredient(ingredient) {
 }
 // create user key:value pair
 function selectCuisine(userCuisine) {
-  localStorage.clear()
-  if (!localStorage.getItem('pastResults')) document.getElementById('secondUser').setAttribute('style', 'display: none;')
+  if (localStorage.getItem('pastResults')) lastMealBtn.setAttribute('style', 'display: none;')
   user.cuisine = userCuisine;
   const cuisineButtons = document.querySelectorAll('.cuisine-button');
   cuisineButtons.forEach(button => {
@@ -202,17 +205,28 @@ function checkBoxInit() {
   if (!this.checked) {
     } else {
       drinkContainerEl.innerHTML = ''
+      localStorage.removeItem('pastResultsCocktail');
       createDrink();
     }
 };
 
 // gets a fun random cocktail
 function createDrink() {
-  const drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  // const lastDrink = 12474
+  if (localStorage.getItem('pastResultsCocktail') !== null) {
+    let lastDrink = localStorage.getItem('pastResultsCocktail')
+    lastDrink = lastDrink.slice(1, -1);
+    console.log(lastDrink)
+    var drinkUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${lastDrink}`
+  } else {
+    drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  }
+  // const drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
   fetch(drinkUrl)
     .then((res) => res.json())
     .then((data) => {
       const drinkData = data.drinks[0];
+      const drinkId = drinkData.idDrink
       const drinkTitle = drinkData.strDrink;
       const imagesrc = drinkData.strDrinkThumb;
       const drinkInstructions = drinkData.strInstructions;
@@ -246,6 +260,7 @@ function createDrink() {
       const rowContent = `<section class="drinkData" class="row" >${textContent}</section>`;
       drinkContainerEl.innerHTML += rowContent;
       drinkContainerEl.setAttribute('style','display: none;')
+      localStorage.setItem('pastResultsCocktail', JSON.stringify(drinkId))
     });
 }
 // target selector for ingredient btns
@@ -262,4 +277,4 @@ function animate(e) {
   }
   };
 
-  if (!localStorage.getItem('pastResults')) document.getElementById('secondUser').setAttribute('style', 'display: none;')
+  if (!localStorage.getItem('pastResults')) lastMealBtn.setAttribute('style', 'display: none;')

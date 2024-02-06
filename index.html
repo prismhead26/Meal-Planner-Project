@@ -11,6 +11,9 @@
 <body>
     <header>
         <h1 class="has-background-primary p-3">🍔 Plan Your Meals 🍔</h1>
+        <section id="past" style="display: show;">
+            <button type="button" id="secondUser" >Your past meal!</button>
+        </section>
     </header>
     <div class="container" id="container">
         <div class="row">
@@ -89,6 +92,7 @@
                 <button id="generateResults" onclick="showNewMealButton()">Show Me Recipes</button>
                 <button id="clearData" class="new-meal-button" style="display: none;">Create a new meal</button>
                 </form>
+                
             </div>
             <div class="button-container"> <!-- Container for the "Show More" button -->
                 <button class="show-more-button" id="showMore">Show More</button>

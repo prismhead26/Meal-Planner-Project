@@ -1,7 +1,7 @@
 // const API_KEY = process.env.API_KEY
 
- const API_KEY = '4d568b90635e43f4a627b33131e5f540'
-// const API_KEY = '0e4952ee45974218818a782582391c14'
+//  const API_KEY = '4d568b90635e43f4a627b33131e5f540'
+const API_KEY = '0e4952ee45974218818a782582391c14'
 // const API_KEY = 'e755066ea6c044f4b71d08597fba8443';
 
 const BASE_URL = 'https://api.spoonacular.com';
@@ -14,6 +14,7 @@ const dynamicBoxEl = document.getElementById('dynamicBox');
 const clearDataEl = document.getElementById('clearData');
 const backBtnEl = document.querySelector('.back-button');
 const drinkContainerEl = document.querySelector('#drinkContainer');
+const pastEl = document.getElementById('past')
 
 showMoreBtnEl.setAttribute('style', 'display: none;');
 // btn event listeners
@@ -71,12 +72,15 @@ function buildParamterString(params) {
       return `${key}=${value}`;
     }).join('&');
 }
-// main function to fetch meal data based on params
-function searchRecipies(cuisineType, dietType, includeIngredientsType) {
+function setAttr() {
   showMoreBtnEl.setAttribute('style', 'display: show;');
   generateResultsEl.setAttribute('style', 'display: none;');
   backBtnEl.setAttribute('style', 'display: none;');
   drinkContainerEl.setAttribute('style', 'display: show;');
+}
+// main function to fetch meal data based on params
+function searchRecipies(cuisineType, dietType, includeIngredientsType) {
+
 
   const params = {
       cuisine: cuisineType,
@@ -134,13 +138,22 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
           }
 
           totalResultCount = data.totalResults;
-
+          console.log('current user obj', user)
+          localStorage.setItem('pastResults', JSON.stringify(user))
           // Hide "Show More" button if total displayed recipes >= 6
           if (containerEl.querySelectorAll('.recipe-container').length >= 2) {
               showMoreBtnEl.setAttribute('style', 'display: none;');
           }
       })
       .catch((err) => console.log('Failed to load', err));
+}
+document.getElementById('secondUser').addEventListener('click', getHistory)
+function getHistory() {
+  showIngredients()
+  showNewMealButton()
+  const lastMeal = JSON.parse(localStorage.getItem('pastResults'))
+  setAttr()
+  searchRecipies(lastMeal.cuisine, lastMeal.diet, lastMeal.includeIngredients)
 }
 // showMoreMeals increasing the offset of the data until data runs out
 function showMoreMeals() {
@@ -159,6 +172,8 @@ function searchWithIngredient(ingredient) {
 }
 // create user key:value pair
 function selectCuisine(userCuisine) {
+  localStorage.clear()
+  if (!localStorage.getItem('pastResults')) document.getElementById('secondUser').setAttribute('style', 'display: none;')
   user.cuisine = userCuisine;
   const cuisineButtons = document.querySelectorAll('.cuisine-button');
   cuisineButtons.forEach(button => {
@@ -179,6 +194,7 @@ function start() {
     return;
   }
   // clearPastResults()
+  setAttr()
   searchRecipies(user.cuisine, user.diet, user.includeIngredients);
 }
 // init function for fetching cocktail data through checkbot
@@ -245,3 +261,5 @@ function animate(e) {
     return;
   }
   };
+
+  if (!localStorage.getItem('pastResults')) document.getElementById('secondUser').setAttribute('style', 'display: none;')

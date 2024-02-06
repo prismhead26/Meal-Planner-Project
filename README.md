@@ -83,7 +83,9 @@ And to be able to get a random cocktail to quench said thirst.
 - Visual Studio Code: [Website](https://code.visualstudio.com/)
 
 ## What We Learned
-
+1. How to build an application with jQeury and Bulma styling, that fetches data from multiple API's.
+2. Implementing different API's and fetching/requesting data.
+3. Team communication skills: Working together to build/create/design a working application using server-sided API's.
 
 ## License
 

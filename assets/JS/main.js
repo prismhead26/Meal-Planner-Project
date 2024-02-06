@@ -1,8 +1,8 @@
 // const API_KEY = process.env.API_KEY
 
-// const API_KEY = '4d568b90635e43f4a627b33131e5f540'
+ const API_KEY = '4d568b90635e43f4a627b33131e5f540'
 // const API_KEY = '0e4952ee45974218818a782582391c14'
-const API_KEY = 'e755066ea6c044f4b71d08597fba8443';
+// const API_KEY = 'e755066ea6c044f4b71d08597fba8443';
 
 const BASE_URL = 'https://api.spoonacular.com';
 const recipeSearchPath = '/recipes/complexSearch';
@@ -133,9 +133,6 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
           }
 
           totalResultCount = data.totalResults;
-
-          // Show "Create a new meal" button after recipes have been generated
-          clearDataEl.style.display = 'block';
 
           // Hide "Show More" button if total displayed recipes >= 6
           if (containerEl.querySelectorAll('.recipe-container').length >= 2) {

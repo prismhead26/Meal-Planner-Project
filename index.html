@@ -15,7 +15,7 @@
     <div class="container" id="container">
         <div class="row">
             <div class="box has-background-primary" id="cuisineBox"> <!-- New box for cuisine selection -->
-                <h2 style="font-weight: bold;">Please select one Cuisine!</h2>
+                <h2>Select a Cuisine!</h2>
                 <button type="button" class="cuisine-button" onclick="selectCuisine('african')">African</button>
                 <button type="button" class="cuisine-button" onclick="selectCuisine('asian')">Asian</button>
                 <button type="button" class="cuisine-button" onclick="selectCuisine('american')">American</button>
@@ -86,8 +86,8 @@
                     <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('grape')">Grape</button>
                     <button type="button" class="ingredient-button" data-diet="vegan,primal,vegetarian,pescatarian,gluten,kosher" onclick="searchWithIngredient('banana')">Banana</button>
                 </div>
-                <button id="generateResults">Show Me Recipes</button>
-                <button id="clearData" class="new-meal-button" style="display:none;">Create a new meal</button>
+                <button id="generateResults" onclick="showNewMealButton()">Show Me Recipes</button>
+                <button id="clearData" class="new-meal-button" style="display: none;">Create a new meal</button>
                 </form>
             </div>
             <div class="button-container"> <!-- Container for the "Show More" button -->
@@ -113,7 +113,12 @@
         function goBack() {
             document.getElementById('dynamicBox').style.display = 'none';
             document.getElementById('cuisineBox').style.display = 'block';
-        }     
+        }
+
+        function showNewMealButton() {
+            const newMealButton = document.getElementById('clearData');
+            newMealButton.style.display = 'block';
+        }
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./assets/JS/main.js"></script>

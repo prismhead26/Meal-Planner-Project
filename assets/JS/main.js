@@ -1,7 +1,7 @@
 // const API_KEY = process.env.API_KEY
 
- const API_KEY = '4d568b90635e43f4a627b33131e5f540'
-// const API_KEY = '0e4952ee45974218818a782582391c14'
+// const API_KEY = '4d568b90635e43f4a627b33131e5f540'
+const API_KEY = '0e4952ee45974218818a782582391c14'
 // const API_KEY = 'e755066ea6c044f4b71d08597fba8443';
 
 const BASE_URL = 'https://api.spoonacular.com';
@@ -14,6 +14,8 @@ const dynamicBoxEl = document.getElementById('dynamicBox');
 const clearDataEl = document.getElementById('clearData');
 const backBtnEl = document.querySelector('.back-button');
 const drinkContainerEl = document.querySelector('#drinkContainer');
+const pastEl = document.getElementById('past')
+const lastMealBtn = document.getElementById('secondUser')
 
 showMoreBtnEl.setAttribute('style', 'display: none;');
 // btn event listeners
@@ -22,6 +24,7 @@ generateResultsEl.addEventListener('click', start);
 dynamicBoxEl.addEventListener('click', checkIngredient);
 generateResultsEl.addEventListener('click', animate);
 clearDataEl.addEventListener('click', clearPastResults);
+lastMealBtn.addEventListener('click', getHistory)
 // checkbox listener
 $('#randomDrinkCheckbox').change(checkBoxInit)
 
@@ -71,12 +74,15 @@ function buildParamterString(params) {
       return `${key}=${value}`;
     }).join('&');
 }
-// main function to fetch meal data based on params
-function searchRecipies(cuisineType, dietType, includeIngredientsType) {
+function setAttr() {
   showMoreBtnEl.setAttribute('style', 'display: show;');
   generateResultsEl.setAttribute('style', 'display: none;');
   backBtnEl.setAttribute('style', 'display: none;');
   drinkContainerEl.setAttribute('style', 'display: show;');
+}
+// main function to fetch meal data based on params
+function searchRecipies(cuisineType, dietType, includeIngredientsType) {
+
 
   const params = {
       cuisine: cuisineType,
@@ -134,13 +140,24 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
           }
 
           totalResultCount = data.totalResults;
-
+          console.log('current user obj', user)
+          localStorage.setItem('pastResults', JSON.stringify(user))
           // Hide "Show More" button if total displayed recipes >= 6
           if (containerEl.querySelectorAll('.recipe-container').length >= 2) {
               showMoreBtnEl.setAttribute('style', 'display: none;');
           }
       })
       .catch((err) => console.log('Failed to load', err));
+}
+
+function getHistory() {
+  lastMealBtn.disabled = true
+  createDrink()
+  showIngredients()
+  showNewMealButton()
+  const lastMeal = JSON.parse(localStorage.getItem('pastResults'))
+  setAttr()
+  searchRecipies(lastMeal.cuisine, lastMeal.diet, lastMeal.includeIngredients)
 }
 // showMoreMeals increasing the offset of the data until data runs out
 function showMoreMeals() {
@@ -159,6 +176,7 @@ function searchWithIngredient(ingredient) {
 }
 // create user key:value pair
 function selectCuisine(userCuisine) {
+  if (localStorage.getItem('pastResults')) lastMealBtn.setAttribute('style', 'display: none;')
   user.cuisine = userCuisine;
   const cuisineButtons = document.querySelectorAll('.cuisine-button');
   cuisineButtons.forEach(button => {
@@ -176,9 +194,11 @@ function clearPastResults() {
 // init function with guard statement to ensure user selects all btns
 function start() {
   if (!user.hasOwnProperty('cuisine') || !user.hasOwnProperty('diet') || !user.hasOwnProperty('includeIngredients')) {
-    return;
+    return $('#warning').text('Must select a choice for each type!')
   }
+  $('#warning').text('')
   // clearPastResults()
+  setAttr()
   searchRecipies(user.cuisine, user.diet, user.includeIngredients);
 }
 // init function for fetching cocktail data through checkbot
@@ -186,17 +206,28 @@ function checkBoxInit() {
   if (!this.checked) {
     } else {
       drinkContainerEl.innerHTML = ''
+      localStorage.removeItem('pastResultsCocktail');
       createDrink();
     }
 };
 
 // gets a fun random cocktail
 function createDrink() {
-  const drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  // const lastDrink = 12474
+  if (localStorage.getItem('pastResultsCocktail') !== null) {
+    let lastDrink = localStorage.getItem('pastResultsCocktail')
+    lastDrink = lastDrink.slice(1, -1);
+    console.log(lastDrink)
+    var drinkUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${lastDrink}`
+  } else {
+    drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  }
+  // const drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
   fetch(drinkUrl)
     .then((res) => res.json())
     .then((data) => {
       const drinkData = data.drinks[0];
+      const drinkId = drinkData.idDrink
       const drinkTitle = drinkData.strDrink;
       const imagesrc = drinkData.strDrinkThumb;
       const drinkInstructions = drinkData.strInstructions;
@@ -230,6 +261,7 @@ function createDrink() {
       const rowContent = `<section class="drinkData" class="row" >${textContent}</section>`;
       drinkContainerEl.innerHTML += rowContent;
       drinkContainerEl.setAttribute('style','display: none;')
+      localStorage.setItem('pastResultsCocktail', JSON.stringify(drinkId))
     });
 }
 // target selector for ingredient btns
@@ -245,3 +277,5 @@ function animate(e) {
     return;
   }
   };
+
+  if (!localStorage.getItem('pastResults')) lastMealBtn.setAttribute('style', 'display: none;')

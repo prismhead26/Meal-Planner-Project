@@ -83,6 +83,7 @@ function setAttr() {
 // main function to fetch meal data based on params
 function searchRecipies(cuisineType, dietType, includeIngredientsType) {
 
+  createDrink();
 
   const params = {
       cuisine: cuisineType,
@@ -152,7 +153,6 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
 
 function getHistory() {
   lastMealBtn.disabled = true
-  createDrink()
   showIngredients()
   showNewMealButton()
   const lastMeal = JSON.parse(localStorage.getItem('pastResults'))
@@ -205,21 +205,22 @@ function start() {
 // init function for fetching cocktail data through checkbot
 function checkBoxInit() {
   if (!this.checked) {
-    } else {
+    return;
+    }
       drinkContainerEl.innerHTML = ''
       localStorage.removeItem('pastResultsCocktail');
-      createDrink();
-    }
+    
 };
 
 // gets a fun random cocktail
 function createDrink() {
-  // const lastDrink = 12474
+  drinkContainerEl.innerHTML = ''
+  let drinkUrl;
   if (localStorage.getItem('pastResultsCocktail') !== null) {
     let lastDrink = localStorage.getItem('pastResultsCocktail')
     lastDrink = lastDrink.slice(1, -1);
     console.log(lastDrink)
-    var drinkUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${lastDrink}`
+    drinkUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${lastDrink}`
   } else {
     drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
   }
@@ -261,7 +262,6 @@ function createDrink() {
     `;
       const rowContent = `<section class="drinkData" class="row" >${textContent}</section>`;
       drinkContainerEl.innerHTML += rowContent;
-      drinkContainerEl.setAttribute('style','display: none;')
       localStorage.setItem('pastResultsCocktail', JSON.stringify(drinkId))
     });
 }

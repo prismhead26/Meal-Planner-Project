@@ -111,6 +111,12 @@
         }
 
         function showIngredients() {
+            if (!user.hasOwnProperty('cuisine')) {
+            // Display warning message if cuisine is not selected
+            document.getElementById('cuisineWarning').style.display = 'block';
+            return; 
+        }
+            document.getElementById('cuisineWarning').style.display = 'none';
             document.getElementById('cuisineBox').style.display = 'none';
             document.getElementById('dynamicBox').style.display = 'block';          
         }

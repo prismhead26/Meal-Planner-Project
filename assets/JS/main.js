@@ -178,6 +178,7 @@ function searchWithIngredient(ingredient) {
 function selectCuisine(userCuisine) {
   if (localStorage.getItem('pastResults')) lastMealBtn.setAttribute('style', 'display: none;')
   user.cuisine = userCuisine;
+  document.getElementById('cuisineWarning').style.display = 'none';
   const cuisineButtons = document.querySelectorAll('.cuisine-button');
   cuisineButtons.forEach(button => {
     button.classList.remove('selected'); // Remove 'selected' class from all cuisine buttons

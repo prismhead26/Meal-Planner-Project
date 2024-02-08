@@ -48,7 +48,7 @@ a:hover {
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
     flex-wrap: wrap;
     margin-top: 10px;
@@ -172,7 +172,8 @@ button#generateResults:hover {
 #dynamicBox {
     display: block;
     float: left;
-    margin-bottom: 20px; /* Add spacing between dynamicBox and recipes */
+    margin-bottom: 20px;
+    flex: 2;
 }
 
 .recipe-container {
@@ -224,4 +225,45 @@ button#generateResults:hover {
     h1 {
         font-size: 1.5em;
     }
+}
+
+.drink-container {
+    background-color: #348678;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    max-width: 200px;
+    flex: 1;
+}
+
+.drink img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 10px;
+    max-height: 100px;
+}
+
+.drink h1 {
+    color: #fff;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.drink p {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.drink ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.drink .ingredients {
+    margin-bottom: 10px;
+}
+
+.drink .measures {
+    margin-bottom: 10px;
 }

@@ -66,13 +66,14 @@ function showNewMealButton() {
 }
 
 function getHistory() {
-  lastMealBtn.disabled = true
-  document.getElementById('cuisineWarning').style.display = 'none';
+  lastMealBtn.disabled = true;
+  showIngredients();
+  showNewMealButton();
+  const lastMeal = JSON.parse(localStorage.getItem('pastResults'));
+  // Hide cuisineBox and show dynamicBox
   document.getElementById('cuisineBox').style.display = 'none';
-  document.getElementById('dynamicBox').style.display = 'block'; 
-  showNewMealButton()
-  const lastMeal = JSON.parse(localStorage.getItem('pastResults'))
-  searchRecipies(lastMeal.cuisine, lastMeal.diet, lastMeal.includeIngredients)
+  document.getElementById('dynamicBox').style.display = 'block';
+  searchRecipies(lastMeal.cuisine, lastMeal.diet, lastMeal.includeIngredients);
 }
 // remove newly created elements with btn to reset application
 function clearPastResults() {

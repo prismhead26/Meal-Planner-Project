@@ -161,15 +161,3 @@ function animate(e) {
 };
 
     if (!localStorage.getItem('pastResults')) lastMealBtn.setAttribute('style', 'display: none;')
-
-
-
-    // function getHistory() {
-    //     lastMealBtn.disabled = true
-    //     document.getElementById('cuisineWarning').style.display = 'none';
-    //     document.getElementById('cuisineBox').style.display = 'none';
-    //     document.getElementById('dynamicBox').style.display = 'block'; 
-    //     showNewMealButton()
-    //     const lastMeal = JSON.parse(localStorage.getItem('pastResults'))
-    //     searchRecipies(lastMeal.cuisine, lastMeal.diet, lastMeal.includeIngredients)
-    //   }

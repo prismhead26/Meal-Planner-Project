@@ -101,37 +101,10 @@
             <div class="drink-container" id="drinkContainer"></div>
         </div>
     </div>
-    <script>
-        function setBoxSize() {
-            const box = document.getElementById('dynamicBox')
-            const totalHeight = array.from(box.children).reduce((acc, child) => {
-                return acc + child.offsetHeight;
-            }, 0);
-            box.style.minHeight = totalHeight + 'px';
-        }
 
-        function showIngredients() {
-            if (!user.hasOwnProperty('cuisine')) {
-            // Display warning message if cuisine is not selected
-            document.getElementById('cuisineWarning').style.display = 'block';
-            return; 
-        }
-            document.getElementById('cuisineWarning').style.display = 'none';
-            document.getElementById('cuisineBox').style.display = 'none';
-            document.getElementById('dynamicBox').style.display = 'block';          
-        }
-
-        function goBack() {
-            document.getElementById('dynamicBox').style.display = 'none';
-            document.getElementById('cuisineBox').style.display = 'block';
-        }
-
-        function showNewMealButton() {
-            const newMealButton = document.getElementById('clearData');
-            newMealButton.style.display = 'block';
-        }
-    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./assets/JS/main.js"></script>
+    <script src="./assets/JS/drinkApi.js"></script>
+    <script src="./assets/JS/mealApi.js"></script>
 </body>
 </html>

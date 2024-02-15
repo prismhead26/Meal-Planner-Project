@@ -104,22 +104,16 @@ function searchRecipies(cuisineType, dietType, includeIngredientsType) {
                 // Loop through the data and generate recipe content
                 let textContent = '';
                 for (let i = 0; i < data.results.length; i++) {
-                    // Generate content for each recipe
-                    const meal = data.results[i];
-                    const mealTitle = meal.title;
-                    const imagesrc = meal.image;
                     // destructiring assignment --- destructuring data obj and create var based on data
-                    const { readyInMinutes } = meal;
-                    const { servings } = meal;
-                    const instructions = meal.spoonacularSourceUrl;
-
+                    const {title, image, readyInMinutes, servings, spoonacularSourceUrl} = data.results[i];
+                    // Generate content for each recipe
                     textContent += `
                         <div id="mealInfo" class="m-3 is-size-6">
-                            <h1>Meal: ${mealTitle}</h1>
-                            <img src="${imagesrc}" alt="food image" class= "image is-128x128"></img>
+                            <h1>Meal: ${title}</h1>
+                            <img src="${image}" alt="food image" class= "image is-128x128"></img>
                             <p class="has-text-primary">Ready in ${readyInMinutes} minutes</p>
                             <p class="has-text-primary">Servings: ${servings}</p> 
-                            <a target="_blank" rel="noopener" href='${instructions}' class="foodLink has-text-centered">Instructions Link</a>
+                            <a target="_blank" rel="noopener" href='${spoonacularSourceUrl}' class="foodLink has-text-centered">Instructions Link</a>
                         </div>
                     `;
                 }
